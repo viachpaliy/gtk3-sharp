@@ -11,210 +11,7 @@ namespace Gtk3{
 	[TypeInitializer (typeof(Widget), "ClassInit")]
 	public class Widget:GLib.InitiallyUnowned, Implementor, IWrapper{
 					
-				[CDeclCallback]
-				private delegate bool AccelCanActivateVMDelegate (IntPtr widget, uint signal_id);
-
-				[CDeclCallback]
-				private delegate void AccelClosuresChangedVMDelegate (IntPtr inst);
-
-				[CDeclCallback]
-				private delegate void ActivateDelegate (IntPtr widget);
-
-				[CDeclCallback]
-				private delegate void BindingHandler (IntPtr handle, IntPtr user_data);
-
-				[CDeclCallback]
-				private delegate bool ButtonPressEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool ButtonReleaseEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate void ChildNotifiedVMDelegate (IntPtr widget, IntPtr pspec);
-
-				[CDeclCallback]
-				private delegate bool ClientEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate void CompositedChangedVMDelegate (IntPtr widget);
-
-				[CDeclCallback]
-				private delegate bool ConfigureEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool DeleteEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool DestroyEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate void DirectionChangedVMDelegate (IntPtr widget, int previous_direction);
-
-				[CDeclCallback]
-				private delegate void DragBeginVMDelegate (IntPtr widget, IntPtr context);
-
-				[CDeclCallback]
-				private delegate void DragDataDeleteVMDelegate (IntPtr widget, IntPtr context);
-
-				[CDeclCallback]
-				private delegate void DragDataGetVMDelegate (IntPtr widget, IntPtr context, IntPtr selection_data, uint info, uint time_);
-
-				[CDeclCallback]
-				private delegate void DragDataReceivedVMDelegate (IntPtr widget, IntPtr context, int x, int y, IntPtr selection_data, uint info, uint time_);
-
-				[CDeclCallback]
-				private delegate bool DragDropVMDelegate (IntPtr widget, IntPtr context, int x, int y, uint time_);
-
-				[CDeclCallback]
-				private delegate void DragEndVMDelegate (IntPtr widget, IntPtr context);
-
-				[CDeclCallback]
-				private delegate bool DragFailedVMDelegate (IntPtr inst, IntPtr drag_context, int drag_result);
-
-				[CDeclCallback]
-				private delegate void DragLeaveVMDelegate (IntPtr widget, IntPtr context, uint time_);
-
-				[CDeclCallback]
-				private delegate bool DragMotionVMDelegate (IntPtr widget, IntPtr context, int x, int y, uint time_);
-
-				[CDeclCallback]
-				private delegate bool EnterNotifyEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool ExposeEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool FocusedVMDelegate (IntPtr widget, int direction);
-
-				[CDeclCallback]
-				private delegate void FocusGrabbedVMDelegate (IntPtr widget);
-
-				[CDeclCallback]
-				private delegate bool FocusInEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool FocusOutEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool GrabBrokenEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate void GrabNotifyVMDelegate (IntPtr widget, bool was_grabbed);
-
-				[CDeclCallback]
-				private delegate bool HelpShownVMDelegate (IntPtr widget, int help_type);
-
-				[CDeclCallback]
-				private delegate void HiddenVMDelegate (IntPtr widget);
-
-				[CDeclCallback]
-				private delegate void HierarchyChangedVMDelegate (IntPtr widget, IntPtr previous_toplevel);
-
-				[CDeclCallback]
-				private delegate bool KeyPressEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool KeyReleaseEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool LeaveNotifyEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool MapEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate void MappedVMDelegate (IntPtr widget);
-
-				[CDeclCallback]
-				private delegate bool MnemonicActivatedVMDelegate (IntPtr widget, bool group_cycling);
-
-				[CDeclCallback]
-				private delegate bool MotionNotifyEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool NoExposeEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate void ParentSetVMDelegate (IntPtr widget, IntPtr previous_parent);
-
-				[CDeclCallback]
-				private delegate bool PopupMenuVMDelegate (IntPtr widget);
-
-				[CDeclCallback]
-				private delegate bool PropertyNotifyEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool ProximityInEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool ProximityOutEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool QueryTooltipVMDelegate (IntPtr widget, int x, int y, bool keyboard_tooltip, IntPtr tooltip);
-
-				[CDeclCallback]
-				private delegate void RealizedVMDelegate (IntPtr widget);
-
-				[CDeclCallback]
-				private delegate void ScreenChangedVMDelegate (IntPtr widget, IntPtr previous_screen);
-
-				[CDeclCallback]
-				private delegate bool ScrollEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool SelectionClearEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate void SelectionGetVMDelegate (IntPtr widget, IntPtr selection_data, uint info, uint time_);
-
-				[CDeclCallback]
-				private delegate bool SelectionNotifyEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate void SelectionReceivedVMDelegate (IntPtr widget, IntPtr selection_data, uint time_);
-
-				[CDeclCallback]
-				private delegate bool SelectionRequestEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate void SetScrollAdjustmentsDelegate (IntPtr widget, IntPtr hadj, IntPtr vadj);
-
-				[CDeclCallback]
-				private delegate void ShownVMDelegate (IntPtr widget);
-
-				[CDeclCallback]
-				private delegate void SizeAllocatedVMDelegate (IntPtr widget, IntPtr allocation);
-
-				[CDeclCallback]
-				private delegate void SizeRequestedVMDelegate (IntPtr widget, IntPtr requisition);
-
-				[CDeclCallback]
-				private delegate void StateChangedVMDelegate (IntPtr widget, int previous_state);
-
-				[CDeclCallback]
-				private delegate void StyleSetVMDelegate (IntPtr widget, IntPtr previous_style);
-
-				[CDeclCallback]
-				private delegate bool UnmapEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate void UnmappedVMDelegate (IntPtr widget);
-
-				[CDeclCallback]
-				private delegate void UnrealizedVMDelegate (IntPtr widget);
-
-				[CDeclCallback]
-				private delegate bool VisibilityNotifyEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate void WidgetEventAfterVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool WidgetEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-				[CDeclCallback]
-				private delegate bool WindowStateEventVMDelegate (IntPtr widget, IntPtr evnt);
-
+			
 		#region Gtk+2 native  functions
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
@@ -674,147 +471,7 @@ namespace Gtk3{
 
 		#endregion
 
-		#region Callbacks
-		//
-		// Static Fields
-		//
-		private static Widget.HierarchyChangedVMDelegate HierarchyChangedVMCallback;
 
-		private static Widget.DragDataDeleteVMDelegate DragDataDeleteVMCallback;
-
-		private static Widget.ScrollEventVMDelegate ScrollEventVMCallback;
-
-		private static Widget.SelectionReceivedVMDelegate SelectionReceivedVMCallback;
-
-		private static Widget.QueryTooltipVMDelegate QueryTooltipVMCallback;
-
-		private static Widget.DestroyEventVMDelegate DestroyEventVMCallback;
-
-		private static Widget.ProximityOutEventVMDelegate ProximityOutEventVMCallback;
-
-		private static Widget.FocusInEventVMDelegate FocusInEventVMCallback;
-
-		private static Widget.SizeRequestedVMDelegate SizeRequestedVMCallback;
-
-		private static Widget.ChildNotifiedVMDelegate ChildNotifiedVMCallback;
-
-		private static Widget.ButtonReleaseEventVMDelegate ButtonReleaseEventVMCallback;
-
-		private static Widget.DirectionChangedVMDelegate DirectionChangedVMCallback;
-
-		private static Widget.WindowStateEventVMDelegate WindowStateEventVMCallback;
-
-		private static Widget.FocusOutEventVMDelegate FocusOutEventVMCallback;
-
-		private static Widget.ClientEventVMDelegate ClientEventVMCallback;
-
-		private static Widget.CompositedChangedVMDelegate CompositedChangedVMCallback;
-
-		private static Widget.PopupMenuVMDelegate PopupMenuVMCallback;
-
-		private static Widget.NoExposeEventVMDelegate NoExposeEventVMCallback;
-
-		private static Widget.SelectionGetVMDelegate SelectionGetVMCallback;
-
-		private static Widget.GrabBrokenEventVMDelegate GrabBrokenEventVMCallback;
-
-		private static Widget.SelectionRequestEventVMDelegate SelectionRequestEventVMCallback;
-
-		private static Widget.DragDropVMDelegate DragDropVMCallback;
-
-		private static Widget.SetScrollAdjustmentsDelegate SetScrollAdjustmentsCallback;
-
-		private static Widget.ActivateDelegate ActivateCallback;
-
-		private static Widget.BindingHandler binding_delegate;
-
-		private static Widget.DragDataGetVMDelegate DragDataGetVMCallback;
-
-		private static Widget.DragDataReceivedVMDelegate DragDataReceivedVMCallback;
-
-		private static Widget.UnmappedVMDelegate UnmappedVMCallback;
-
-		private static Widget.ConfigureEventVMDelegate ConfigureEventVMCallback;
-
-		private static Widget.HelpShownVMDelegate HelpShownVMCallback;
-
-		private static Widget.EnterNotifyEventVMDelegate EnterNotifyEventVMCallback;
-
-		private static Widget.SelectionClearEventVMDelegate SelectionClearEventVMCallback;
-
-		private static Widget.WidgetEventAfterVMDelegate WidgetEventAfterVMCallback;
-
-		private static Widget.FocusGrabbedVMDelegate FocusGrabbedVMCallback;
-
-		private static Widget.PropertyNotifyEventVMDelegate PropertyNotifyEventVMCallback;
-
-		private static Widget.DragFailedVMDelegate DragFailedVMCallback;
-
-		private static Widget.ParentSetVMDelegate ParentSetVMCallback;
-
-		private static Widget.ShownVMDelegate ShownVMCallback;
-
-		private static Widget.MotionNotifyEventVMDelegate MotionNotifyEventVMCallback;
-
-		private static Widget.VisibilityNotifyEventVMDelegate VisibilityNotifyEventVMCallback;
-
-		private static Widget.AccelCanActivateVMDelegate AccelCanActivateVMCallback;
-
-		private static Widget.DragEndVMDelegate DragEndVMCallback;
-
-		private static Widget.UnmapEventVMDelegate UnmapEventVMCallback;
-
-		private static Widget.ProximityInEventVMDelegate ProximityInEventVMCallback;
-
-		private static Widget.UnrealizedVMDelegate UnrealizedVMCallback;
-
-		private static Widget.ButtonPressEventVMDelegate ButtonPressEventVMCallback;
-
-		private static Widget.WidgetEventVMDelegate WidgetEventVMCallback;
-
-		private static Widget.KeyPressEventVMDelegate KeyPressEventVMCallback;
-
-		private static Widget.RealizedVMDelegate RealizedVMCallback;
-
-		private static Widget.StateChangedVMDelegate StateChangedVMCallback;
-
-		private static Widget.LeaveNotifyEventVMDelegate LeaveNotifyEventVMCallback;
-
-		private static Widget.SizeAllocatedVMDelegate SizeAllocatedVMCallback;
-
-		private static Widget.HiddenVMDelegate HiddenVMCallback;
-
-		private static Widget.FocusedVMDelegate FocusedVMCallback;
-
-		private static Widget.DragLeaveVMDelegate DragLeaveVMCallback;
-
-		private static Widget.ScreenChangedVMDelegate ScreenChangedVMCallback;
-
-		private static Widget.KeyReleaseEventVMDelegate KeyReleaseEventVMCallback;
-
-		private static Widget.DragBeginVMDelegate DragBeginVMCallback;
-
-		private static Widget.DragMotionVMDelegate DragMotionVMCallback;
-
-		private static Widget.GrabNotifyVMDelegate GrabNotifyVMCallback;
-
-		private static Widget.MapEventVMDelegate MapEventVMCallback;
-
-		private static Widget.ExposeEventVMDelegate ExposeEventVMCallback;
-
-		private static Widget.StyleSetVMDelegate StyleSetVMCallback;
-
-		private static Widget.MnemonicActivatedVMDelegate MnemonicActivatedVMCallback;
-
-		private static Widget.AccelClosuresChangedVMDelegate AccelClosuresChangedVMCallback;
-
-		private static Widget.SelectionNotifyEventVMDelegate SelectionNotifyEventVMCallback;
-
-		private static Widget.MappedVMDelegate MappedVMCallback;
-
-		private static Widget.DeleteEventVMDelegate DeleteEventVMCallback;
-
-		#endregion
 
 		#region Native widget's properties
 
@@ -1122,6 +779,49 @@ namespace Gtk3{
 
 		#endregion
 
+		#region Native widget's signals
+
+		[Signal ("accel-closures-changed")]
+		//
+		public event EventHandler AccelClosuresChanged {
+			add {
+				Signal signal = Signal.Lookup (this, "accel-closures-changed");
+				signal.AddDelegate (value);
+			}
+			remove {
+				Signal signal = Signal.Lookup (this, "accel-closures-changed");
+				signal.RemoveDelegate (value);
+			}
+		}
+
+		[Signal ("button-press-event")]
+		// Signal will be emitted when a button (typically from a mouse) is pressed.
+		public event ButtonPressEventHandler ButtonPressEvent {
+			add {
+				Signal signal = Signal.Lookup (this, "button-press-event", typeof(ButtonPressEventArgs));
+				signal.AddDelegate (value);
+			}
+			remove {
+				Signal signal = Signal.Lookup (this, "button-press-event", typeof(ButtonPressEventArgs));
+				signal.RemoveDelegate (value);
+			}
+		}
+
+
+		[Signal ("button-release-event")]
+		// Signal will be emitted when a button (typically from a mouse) is released.
+		public event ButtonReleaseEventHandler ButtonReleaseEvent {
+			add {
+				Signal signal = Signal.Lookup (this, "button-release-event", typeof(ButtonReleaseEventArgs));
+				signal.AddDelegate (value);
+			}
+			remove {
+				Signal signal = Signal.Lookup (this, "button-release-event", typeof(ButtonReleaseEventArgs));
+				signal.RemoveDelegate (value);
+			}
+		}
+
+		#endregion
 
 
 			}

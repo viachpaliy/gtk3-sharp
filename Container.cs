@@ -9,41 +9,7 @@ namespace Gtk3
 	public class Container : Widget, IEnumerable
 	{
 
-		#region Delegats 
 
-		[CDeclCallback]
-		private delegate void AddedVMDelegate (IntPtr container, IntPtr widget);
-
-		[CDeclCallback]
-		private delegate IntPtr ChildTypeDelegate (IntPtr raw);
-
-		[CDeclCallback]
-		private delegate void FocusChildSetVMDelegate (IntPtr container, IntPtr widget);
-
-		[CDeclCallback]
-		private delegate void ForallDelegate (IntPtr container, bool include_internals, IntPtr cb, IntPtr data);
-
-		[CDeclCallback]
-		private delegate void RemovedVMDelegate (IntPtr container, IntPtr widget);
-
-		[CDeclCallback]
-		private delegate void ResizeCheckedVMDelegate (IntPtr container);
-
-		//Static Fields
-
-		private static Container.ResizeCheckedVMDelegate ResizeCheckedVMCallback;
-
-		private static Container.RemovedVMDelegate RemovedVMCallback;
-
-		private static Container.ChildTypeDelegate ChildTypeCallback;
-
-		private static Container.ForallDelegate ForallCallback;
-
-		private static Container.FocusChildSetVMDelegate FocusChildSetVMCallback;
-
-		private static Container.AddedVMDelegate AddedVMCallback;
-
-		#endregion
 
 		#region Gtk+ native functions
 

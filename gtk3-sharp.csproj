@@ -62,6 +62,11 @@
     <Compile Include="FocusChildSetHandler.cs" />
     <Compile Include="RemovedArgs.cs" />
     <Compile Include="RemovedHandler.cs" />
+    <Compile Include="WindowPosition.cs" />
+    <Compile Include="ButtonPressEventArgs.cs" />
+    <Compile Include="ButtonPressEventHandler.cs" />
+    <Compile Include="ButtonReleaseEventArgs.cs" />
+    <Compile Include="ButtonReleaseEventHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

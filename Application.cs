@@ -33,7 +33,8 @@ namespace Gtk3 {
 			//SetPrgname ();
 			IntPtr argv = new IntPtr(0);
 			int argc = 0;
-
+			//string[] arg = new string[]{ };
+			//Gdk.Global.InitCheck (ref arg);
 			gtk_init (ref argc, ref argv);
 
 			//SynchronizationContext.SetSynchronizationContext (new GLib.GLibSynchronizationContext ());

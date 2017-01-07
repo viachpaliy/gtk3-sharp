@@ -426,16 +426,16 @@ namespace Gtk3{
 			}
 		}
 
-		[Property ("gravity")]
-		//The window gravity of the window. 
-		public Gravity Gravity {
-			get {
-				return (Gravity)Window.gtk_window_get_gravity (base.Handle);
-			}
-			set {
-				Window.gtk_window_set_gravity (base.Handle, (int)value);
-			}
-		}
+//		[Property ("gravity")]
+//		//The window gravity of the window. 
+//		public Gdk.Gravity Gravity {
+//			get {
+//				return (Gdk.Gravity)Window.gtk_window_get_gravity (base.Handle);
+//			}
+//			set {
+//				Window.gtk_window_set_gravity (base.Handle, (int)value);
+//			}
+//		}
 
 		[Property ("has-toplevel-focus")]
 		//Whether the input focus is within this Gtk3.Window.
@@ -448,9 +448,156 @@ namespace Gtk3{
 			}
 		}
 
+		[Property ("hide-titlebar-when-maximized")]
+		//Whether the titlebar should be hidden during maximization.
+		public bool HideTitlebarWhenMaximized {
+			get {
+				GLib.Value property = base.GetProperty ("hide-titlebar-when-maximized");
+				bool result = (bool)property;
+				property.Dispose ();
+				return result;
+			}
+			set {
+				GLib.Value val = new GLib.Value (value);
+				base.SetProperty ("hide-titlebar-when-maximized", val);
+				val.Dispose ();
+			}
+		}
 
+		[Property ("icon")]
+		//Icon for this window.
+		public Pixbuf Icon {
+			get {
+				IntPtr o = Window.gtk_window_get_icon (base.Handle);
+				return GLib.Object.GetObject (o) as Pixbuf;
+			}
+			set {
+				Window.gtk_window_set_icon (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
+			}
+		}
+
+	
+		[Property ("icon-name")]
+		public string IconName {
+			get {
+				IntPtr ptr = Window.gtk_window_get_icon_name (base.Handle);
+				return Marshaller.Utf8PtrToString (ptr);
+			}
+			set {
+				IntPtr intPtr = Marshaller.StringToPtrGStrdup (value);
+				Window.gtk_window_set_icon_name (base.Handle, intPtr);
+				Marshaller.Free (intPtr);
+			}
+		}
+
+		[Property ("is-active")]
+		//Whether the toplevel is the current active window.
+		public bool IsActive {
+			get {
+				Value property = base.GetProperty ("is-active");
+				bool result = (bool)property;
+				property.Dispose ();
+				return result;
+			}
+		}
+
+		[Property ("is-maximized")]
+		//Whether the window is maximized.
+		public bool IsMaximized {
+			get {
+				Value property = base.GetProperty ("is-maximized");
+				bool result = (bool)property;
+				property.Dispose ();
+				return result;
+			}
+		}
+
+
+		[Property ("modal")]
+		//If TRUE, the window is modal (other windows are not usable while this one is up).
+		public bool Modal {
+			get {
+				return Window.gtk_window_get_modal (base.Handle);
+			}
+			set {
+				Window.gtk_window_set_modal (base.Handle, value);
+			}
+		}
+
+		[Property ("resizable")]
+		//If TRUE, users can resize the window.
+		public bool Resizable {
+			get {
+				return Window.gtk_window_get_resizable (base.Handle);
+			}
+			set {
+				Window.gtk_window_set_resizable (base.Handle, value);
+			}
+		}
+
+		[Property ("role")]
+		//Unique identifier for the window to be used when restoring a session
+		public string Role {
+			get {
+				GLib.Value property = base.GetProperty ("role");
+				string result = (string)property;
+				property.Dispose ();
+				return result;
+			}
+			set {
+				GLib.Value val = new GLib.Value (value);
+				base.SetProperty ("role", val);
+				val.Dispose ();
+			}
+		}
+
+//		[Property ("screen")]
+//		//The screen where this window will be displayed.
+//		public Gdk.Screen Screen {
+//			get {
+//				IntPtr o = Window.gtk_window_get_screen (base.Handle);
+//				return GLib.Object.GetObject (o) as Gdk.Screen;
+//			}
+//			set {
+//				Window.gtk_window_set_screen (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
+//			}
+//		}
+
+		[Property ("skip-pager-hint")]
+		//TRUE if the window should not be in the pager.
+		public bool SkipPagerHint {
+			get {
+				return Window.gtk_window_get_skip_pager_hint (base.Handle);
+			}
+			set {
+				Window.gtk_window_set_skip_pager_hint (base.Handle, value);
+			}
+		}
+
+		[Property ("skip-taskbar-hint")]
+		//TRUE if the window should not be in the task bar.
+		public bool SkipTaskbarHint {
+			get {
+				return Window.gtk_window_get_skip_taskbar_hint (base.Handle);
+			}
+			set {
+				Window.gtk_window_set_skip_taskbar_hint (base.Handle, value);
+			}
+		}
+
+
+		[Property ("startup-id")]
+		//Window's startup notification identifier.
+		public string StartupId {
+			set {
+				IntPtr intPtr = Marshaller.StringToPtrGStrdup (value);
+				Window.gtk_window_set_startup_id (base.Handle, intPtr);
+				Marshaller.Free (intPtr);
+			}
+		}
 
 		[Property ("title")]
+		//The title of the window.
 		public string Title {
 			get {
 				IntPtr ptr = Window.gtk_window_get_title (base.Handle);
@@ -460,6 +607,68 @@ namespace Gtk3{
 				IntPtr intPtr = Marshaller.StringToPtrGStrdup (value);
 				Window.gtk_window_set_title (base.Handle, intPtr);
 				Marshaller.Free (intPtr);
+			}
+		}
+
+		[Property ("transient-for")]
+		//The transient parent of the window.
+		public Window TransientFor {
+			get {
+				IntPtr o = Window.gtk_window_get_transient_for (base.Handle);
+				return GLib.Object.GetObject (o) as Window;
+			}
+			set {
+				Window.gtk_window_set_transient_for (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
+			}
+		}
+
+		 
+		[Property ("type")]
+		//The type of the window.
+		public WindowType Type {
+			get {
+				Value property = base.GetProperty ("type");
+				WindowType result = (WindowType)((Enum)property);
+				property.Dispose ();
+				return result;
+			}
+		}
+
+//		[Property ("type-hint")]
+//		//Hint to help the desktop environment understand what kind of window this is and how to treat it.
+//		public WindowTypeHint TypeHint {
+//			get {
+//				return (WindowTypeHint)Window.gtk_window_get_type_hint (base.Handle);
+//			}
+//			set {
+//				Window.gtk_window_set_type_hint (base.Handle, (int)value);
+//			}
+//		}
+
+		[Property ("urgency-hint")]
+		//TRUE if the window should be brought to the user's attention.
+		public bool UrgencyHint {
+			get {
+				return Window.gtk_window_get_urgency_hint (base.Handle);
+			}
+			set {
+				Window.gtk_window_set_urgency_hint (base.Handle, value);
+			}
+		}
+
+		[Property ("window-position")]
+		//The initial position of the window.
+		public WindowPosition WindowPosition {
+			get {
+				Value property = base.GetProperty ("window-position");
+				WindowPosition result = (WindowPosition)((Enum)property);
+				property.Dispose ();
+				return result;
+			}
+			set {
+				Value val = new Value (value);
+				base.SetProperty ("window-position", val);
+				val.Dispose ();
 			}
 		}
 
