@@ -532,16 +532,16 @@ namespace Gtk3{
 			}
 		}
 
-//		[Property ("events")]
-//		//The event mask that decides what kind of GdkEvents this widget gets.
-//		public EventMask Events {
-//			get {
-//				return (EventMask)Widget.gtk_widget_get_events (base.Handle);
-//			}
-//			set {
-//				Widget.gtk_widget_set_events (base.Handle, (int)value);
-//			}
-//		}
+		[Property ("events")]
+		//The event mask that decides what kind of GdkEvents this widget gets.
+		public EventMask Events {
+			get {
+				return (EventMask)Widget.gtk_widget_get_events (base.Handle);
+			}
+			set {
+				Widget.gtk_widget_set_events (base.Handle, (int)value);
+			}
+		}
 
 		[Property ("expand")]
 		//Whether to expand in both directions. Setting this sets both “hexpand” and “vexpand”
@@ -756,7 +756,7 @@ namespace Gtk3{
 		#region Constructors
 		protected Widget () : base (IntPtr.Zero)
 		{
-			this.CreateNativeObject (new string[0], new GLib.Value[0]);
+			//this.CreateNativeObject (new string[0], new GLib.Value[0]);
 		}
 
 		public Widget (IntPtr raw) : base (raw)
@@ -820,6 +820,36 @@ namespace Gtk3{
 				signal.RemoveDelegate (value);
 			}
 		}
+
+	
+
+		[Signal ("child-notify")]
+		//Signal is emitted for each child property that has changed on an object. 
+		public event ChildNotifiedHandler ChildNotified {
+			add {
+				Signal signal = Signal.Lookup (this, "child-notify", typeof(ChildNotifiedArgs));
+				signal.AddDelegate (value);
+			}
+			remove {
+				Signal signal = Signal.Lookup (this, "child-notify", typeof(ChildNotifiedArgs));
+				signal.RemoveDelegate (value);
+			}
+		}
+
+
+		[Signal ("composited-changed")]
+		//Signal is emitted when the composited status of widgets screen changes.
+		public event EventHandler CompositedChanged {
+			add {
+				Signal signal = Signal.Lookup (this, "composited-changed");
+				signal.AddDelegate (value);
+			}
+			remove {
+				Signal signal = Signal.Lookup (this, "composited-changed");
+				signal.RemoveDelegate (value);
+			}
+		}
+
 
 		#endregion
 

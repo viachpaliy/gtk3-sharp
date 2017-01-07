@@ -426,16 +426,16 @@ namespace Gtk3{
 			}
 		}
 
-//		[Property ("gravity")]
-//		//The window gravity of the window. 
-//		public Gdk.Gravity Gravity {
-//			get {
-//				return (Gdk.Gravity)Window.gtk_window_get_gravity (base.Handle);
-//			}
-//			set {
-//				Window.gtk_window_set_gravity (base.Handle, (int)value);
-//			}
-//		}
+		[Property ("gravity")]
+		//The window gravity of the window. 
+		public Gdk.Gravity Gravity {
+			get {
+				return (Gdk.Gravity)Window.gtk_window_get_gravity (base.Handle);
+			}
+			set {
+				Window.gtk_window_set_gravity (base.Handle, (int)value);
+			}
+		}
 
 		[Property ("has-toplevel-focus")]
 		//Whether the input focus is within this Gtk3.Window.
@@ -551,17 +551,17 @@ namespace Gtk3{
 			}
 		}
 
-//		[Property ("screen")]
-//		//The screen where this window will be displayed.
-//		public Gdk.Screen Screen {
-//			get {
-//				IntPtr o = Window.gtk_window_get_screen (base.Handle);
-//				return GLib.Object.GetObject (o) as Gdk.Screen;
-//			}
-//			set {
-//				Window.gtk_window_set_screen (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
-//			}
-//		}
+		[Property ("screen")]
+		//The screen where this window will be displayed.
+		public Gdk.Screen Screen {
+			get {
+				IntPtr o = Window.gtk_window_get_screen (base.Handle);
+				return GLib.Object.GetObject (o) as Gdk.Screen;
+			}
+			set {
+				Window.gtk_window_set_screen (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
+			}
+		}
 
 		[Property ("skip-pager-hint")]
 		//TRUE if the window should not be in the pager.
@@ -634,16 +634,16 @@ namespace Gtk3{
 			}
 		}
 
-//		[Property ("type-hint")]
-//		//Hint to help the desktop environment understand what kind of window this is and how to treat it.
-//		public WindowTypeHint TypeHint {
-//			get {
-//				return (WindowTypeHint)Window.gtk_window_get_type_hint (base.Handle);
-//			}
-//			set {
-//				Window.gtk_window_set_type_hint (base.Handle, (int)value);
-//			}
-//		}
+		[Property ("type-hint")]
+		//Hint to help the desktop environment understand what kind of window this is and how to treat it.
+		public WindowTypeHint TypeHint {
+			get {
+				return (WindowTypeHint)Window.gtk_window_get_type_hint (base.Handle);
+			}
+			set {
+				Window.gtk_window_set_type_hint (base.Handle, (int)value);
+			}
+		}
 
 		[Property ("urgency-hint")]
 		//TRUE if the window should be brought to the user's attention.

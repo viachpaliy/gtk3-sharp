@@ -67,6 +67,8 @@
     <Compile Include="ButtonPressEventHandler.cs" />
     <Compile Include="ButtonReleaseEventArgs.cs" />
     <Compile Include="ButtonReleaseEventHandler.cs" />
+    <Compile Include="ChildNotifiedArgs.cs" />
+    <Compile Include="ChildNotifiedHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
