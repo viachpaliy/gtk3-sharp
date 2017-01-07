@@ -3,7 +3,7 @@ using System;
 
 namespace Gtk3
 {
-	[GType (typeof(TextDirectionGType))]
+	//[GType (typeof(TextDirectionGType))]
 	public enum TextDirection
 	{
 		None,

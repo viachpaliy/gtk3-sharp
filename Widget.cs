@@ -215,7 +215,7 @@ namespace Gtk3{
 				[CDeclCallback]
 				private delegate bool WindowStateEventVMDelegate (IntPtr widget, IntPtr evnt);
 
-		#region import native dll functions
+		#region Gtk+2 native  functions
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern bool gtk_widget_activate (IntPtr raw);
@@ -615,7 +615,7 @@ namespace Gtk3{
 
 		#endregion
 
-		#region Gtk+3 import functions
+		#region Gtk+3 native functions
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern int gtk_widget_get_halign (IntPtr raw);
@@ -816,7 +816,7 @@ namespace Gtk3{
 
 		#endregion
 
-		#region Properties
+		#region Native widget's properties
 
 		[Property ("app-paintable")]
 		//Whether the application will paint directly on the widget.
@@ -1096,15 +1096,19 @@ namespace Gtk3{
 			return new Atk.Object(o);
 		}
 
-
-		protected Widget () : base (IntPtr.Zero){}
+		#region Constructors
+		protected Widget () : base (IntPtr.Zero)
+		{
+			this.CreateNativeObject (new string[0], new GLib.Value[0]);
+		}
 
 		public Widget (IntPtr raw) : base (raw)
 		{
 		}
 
+		#endregion
 
-
+		#region Methods
 
 		public void Show ()
 		{
@@ -1115,6 +1119,10 @@ namespace Gtk3{
 		{
 			Widget.gtk_widget_show_all (base.Handle);
 		}
+
+		#endregion
+
+
 
 			}
 

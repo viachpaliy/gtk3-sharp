@@ -53,8 +53,9 @@
     <Compile Include="WindowType.cs" />
     <Compile Include="Widget.cs" />
     <Compile Include="TextDirection.cs" />
-    <Compile Include="TextDirectionGType.cs" />
     <Compile Include="GtkAlign.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="ResizeMode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
