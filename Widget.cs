@@ -875,16 +875,16 @@ namespace Gtk3{
 			}
 		}
 
-		[Property ("events")]
-		//The event mask that decides what kind of GdkEvents this widget gets.
-		public EventMask Events {
-			get {
-				return (EventMask)Widget.gtk_widget_get_events (base.Handle);
-			}
-			set {
-				Widget.gtk_widget_set_events (base.Handle, (int)value);
-			}
-		}
+//		[Property ("events")]
+//		//The event mask that decides what kind of GdkEvents this widget gets.
+//		public EventMask Events {
+//			get {
+//				return (EventMask)Widget.gtk_widget_get_events (base.Handle);
+//			}
+//			set {
+//				Widget.gtk_widget_set_events (base.Handle, (int)value);
+//			}
+//		}
 
 		[Property ("expand")]
 		//Whether to expand in both directions. Setting this sets both “hexpand” and “vexpand”
