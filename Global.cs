@@ -20,7 +20,24 @@ namespace Gtk3 {
 
 		internal const string AtkNativeDll="libatk-1.0.so.0";
 
+		#region StyleProvider priority
 
+		internal const uint GTK_STYLE_PROVIDER_PRIORITY_FALLBACK = 1;
+		//The priority used for default style information that is used in the absence of themes.
+
+		internal const uint GTK_STYLE_PROVIDER_PRIORITY_THEME = 200;
+		//The priority used for style information provided by themes.
+
+		internal const uint GTK_STYLE_PROVIDER_PRIORITY_SETTINGS = 400;
+		//The priority used for style information provided via GtkSettings.
+
+		internal const uint GTK_STYLE_PROVIDER_PRIORITY_APPLICATION = 600;
+		//A priority that can be used when adding a GtkStyleProvider for application-specific style information.
+
+		internal const uint GTK_STYLE_PROVIDER_PRIORITY_USER = 800;
+		//The priority used for the style information from ~/.gtk-3.0.css.
+
+		#endregion
 //		public static bool ShowUri (string uri)
 //		{
 //			return ShowUri (null, uri);

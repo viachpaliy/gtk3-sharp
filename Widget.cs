@@ -407,6 +407,9 @@ namespace Gtk3{
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void gtk_widget_unrealize (IntPtr raw);
 
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr gtk_widget_get_window (IntPtr raw);
+
 		[DllImport (Global.AtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr atk_implementor_ref_accessible (IntPtr raw);
 
@@ -419,6 +422,12 @@ namespace Gtk3{
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void gtk_widget_set_halign (IntPtr raw, int align); 
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern int gtk_widget_get_valign (IntPtr raw);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_widget_set_valign (IntPtr raw, int align); 
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern bool gtk_widget_get_hexpand (IntPtr raw);
@@ -467,6 +476,15 @@ namespace Gtk3{
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void gtk_widget_set_margin_top (IntPtr raw, int margin);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern double gtk_widget_get_opacity (IntPtr raw);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_widget_set_opacity (IntPtr raw, double opacity);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern int gtk_widget_get_scale_factor (IntPtr raw);
 
 
 		#endregion
@@ -744,6 +762,199 @@ namespace Gtk3{
 			}
 		}
 
+		[Property ("name")]
+		//The name of the widget.
+		public string Name {
+			get {
+				IntPtr ptr = Widget.gtk_widget_get_name (base.Handle);
+				return Marshaller.Utf8PtrToString (ptr);
+			}
+			set {
+				IntPtr intPtr = Marshaller.StringToPtrGStrdup (value);
+				Widget.gtk_widget_set_name (base.Handle, intPtr);
+				Marshaller.Free (intPtr);
+			}
+		}
+
+
+		[Property ("no-show-all")]
+		//Whether gtk_widget_show_all() should not affect this widget.
+		public bool NoShowAll {
+			get {
+				return Widget.gtk_widget_get_no_show_all (base.Handle);
+			}
+			set {
+				Widget.gtk_widget_set_no_show_all (base.Handle, value);
+			}
+		}
+
+		[Property ("opacity")]
+		//The requested opacity of the widget. 
+		public double Opacity {
+			get{
+				return Widget.gtk_widget_get_opacity (base.Handle);
+			}
+			set {
+				Widget.gtk_widget_set_opacity (base.Handle, value);
+			}
+		}
+
+
+		[Property ("parent")]
+		//The parent widget of this widget. Must be a Container widget.
+		public Container Parent {
+			get {
+				IntPtr o = Widget.gtk_widget_get_parent (base.Handle);
+				return GLib.Object.GetObject(o) as Container;
+			}
+			set {
+				Widget.gtk_widget_set_parent (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
+			}
+		}
+
+
+		[Property ("receives-default")]
+		//If TRUE, the widget will receive the default action when it is focused.
+		public bool ReceivesDefault {
+			get {
+				GLib.Value property = base.GetProperty ("receives-default");
+				bool result = (bool)property;
+				property.Dispose ();
+				return result;
+			}
+			set {
+				GLib.Value val = new GLib.Value (value);
+				base.SetProperty ("receives-default", val);
+				val.Dispose ();
+			}
+		}
+
+		[Property ("scale-factor")]
+		//Retrieves the internal scale factor that maps from window coordinates to the actual device pixels.
+		//On traditional systems this is 1, on high density outputs, it can be a higher value (typically 2).
+		public int ScaleFactor {
+			get{
+				return Widget.gtk_widget_get_scale_factor (base.Handle);
+			}
+		}
+
+		[Property ("sensitive")]
+		//Whether the widget responds to input.
+		public bool Sensitive {
+			get {
+				GLib.Value property = base.GetProperty ("sensitive");
+				bool result = (bool)property;
+				property.Dispose ();
+				return result;
+			}
+			set {
+				Widget.gtk_widget_set_sensitive (base.Handle, value);
+			}
+		}
+
+		[Property ("tooltip-markup")]
+		//Sets the text of tooltip to be the given string, which is marked up with the Pango text markup language.
+		public string TooltipMarkup {
+			get {
+				IntPtr ptr = Widget.gtk_widget_get_tooltip_markup (base.Handle);
+				return Marshaller.PtrToStringGFree (ptr);
+			}
+			set {
+				IntPtr intPtr = Marshaller.StringToPtrGStrdup (value);
+				Widget.gtk_widget_set_tooltip_markup (base.Handle, intPtr);
+				Marshaller.Free (intPtr);
+			}
+		}
+
+		[Property ("tooltip-text")]
+		//Sets the text of tooltip to be the given string.
+		public string TooltipText {
+			get {
+				IntPtr ptr = Widget.gtk_widget_get_tooltip_text (base.Handle);
+				return Marshaller.PtrToStringGFree (ptr);
+			}
+			set {
+				IntPtr intPtr = Marshaller.StringToPtrGStrdup (value);
+				Widget.gtk_widget_set_tooltip_text (base.Handle, intPtr);
+				Marshaller.Free (intPtr);
+			}
+		}
+
+
+		[Property ("valign")]
+		//How to distribute vertical space if widget gets extra space.
+		public GtkAlign Valign {
+			get {
+				return (GtkAlign)Widget.gtk_widget_get_valign (base.Handle);
+			}
+			set {
+				Widget.gtk_widget_set_valign (base.Handle, (int)value);
+			}
+		}
+
+		[Property ("vexpand")]
+		//Whether to expand vertically.
+		public bool Vexpand {
+			get {
+				return Widget.gtk_widget_get_vexpand(base.Handle);
+			}
+			set {
+				Widget.gtk_widget_set_vexpand (base.Handle, value);
+			}
+		}
+
+		[Property ("vexpand-set")]
+		//Whether to use the “vexpand” property.
+		public bool VexpandSet {
+			get {
+				return Widget.gtk_widget_get_vexpand_set(base.Handle);
+			}
+			set {
+				Widget.gtk_widget_set_vexpand_set (base.Handle, value);
+			}
+		}
+
+		[Property ("visible")]
+		//Whether the widget is visible.
+		public bool Visible {
+			get {
+				GLib.Value property = base.GetProperty ("visible");
+				bool result = (bool)property;
+				property.Dispose ();
+				return result;
+			}
+			set {
+				GLib.Value val = new GLib.Value (value);
+				base.SetProperty ("visible", val);
+				val.Dispose ();
+			}
+		}
+
+		[Property ("width-request")]
+		//Override for width request of the widget, or -1 if natural request should be used.
+		public int WidthRequest {
+			get {
+				GLib.Value property = base.GetProperty ("width-request");
+				int result = (int)property;
+				property.Dispose ();
+				return result;
+			}
+			set {
+				GLib.Value val = new GLib.Value (value);
+				base.SetProperty ("width-request", val);
+				val.Dispose ();
+			}
+		}
+
+		[Property ("window")]
+		//The widget's window if it is realized, NULL otherwise.
+		public Gdk.Window Window{
+			get{
+				IntPtr o = Widget.gtk_widget_get_window (base.Handle);
+				return GLib.Object.GetObject(o) as Gdk.Window;
+			}
+		}
+
 
 		#endregion
 
@@ -775,6 +986,48 @@ namespace Gtk3{
 		public void ShowAll ()
 		{
 			Widget.gtk_widget_show_all (base.Handle);
+		}
+
+		#endregion
+		#region Callbacks for native signals
+
+		[CDeclCallback]
+		private delegate bool ButtonPressEventVMDelegate (IntPtr widget, IntPtr evnt);
+
+		private static Widget.ButtonPressEventVMDelegate ButtonPressEventVMCallback;
+
+		[DllImport ("/usr/lib/cli/gtk-sharp-2.0/libgtksharpglue-2.so")]
+		private static extern bool gtksharp_widget_base_button_press_event (IntPtr widget, IntPtr evnt);
+
+		[DllImport ("/usr/lib/cli/gtk-sharp-2.0/libgtksharpglue-2.so")]
+		private static extern void gtksharp_widget_override_button_press_event (IntPtr gtype, Widget.ButtonPressEventVMDelegate cb);
+
+
+		[DefaultSignalHandler (Type = typeof(Widget), ConnectionMethod = "OverrideButtonPressEvent")]
+		protected virtual bool OnButtonPressEvent (EventButton evnt)
+		{
+			return Widget.gtksharp_widget_base_button_press_event (base.Handle, (evnt != null) ? evnt.Handle : IntPtr.Zero);
+		}
+		private static bool buttonpressevent_cb (IntPtr widget, IntPtr evnt)
+		{
+			bool result;
+			try {
+				Widget widget2 = GLib.Object.GetObject (widget, false) as Widget;
+				result = widget2.OnButtonPressEvent (new EventButton (evnt));
+			}
+			catch (Exception ex) {
+				ExceptionManager.RaiseUnhandledException (ex, true);
+				throw ex;
+			}
+			return result;
+		}
+
+		private static void OverrideButtonPressEvent (GType gtype)
+		{
+			if (Widget.ButtonPressEventVMCallback == null) {
+				Widget.ButtonPressEventVMCallback = new Widget.ButtonPressEventVMDelegate (Widget.buttonpressevent_cb);
+			}
+			Widget.gtksharp_widget_override_button_press_event (gtype.Val, Widget.ButtonPressEventVMCallback);
 		}
 
 		#endregion
@@ -850,7 +1103,45 @@ namespace Gtk3{
 			}
 		}
 
+		[Signal ("configure-event")]
+		//Signal will be emitted when the size, position or stacking of the widget 's window has changed.
+		public event ConfigureEventHandler ConfigureEvent {
+			add {
+				Signal signal = Signal.Lookup (this, "configure-event", typeof(ConfigureEventArgs));
+				signal.AddDelegate (value);
+			}
+			remove {
+				Signal signal = Signal.Lookup (this, "configure-event", typeof(ConfigureEventArgs));
+				signal.RemoveDelegate (value);
+			}
+		}
 
+
+		[Signal ("delete-event")]
+		// Signal is emitted if a user requests that a toplevel window is closed.
+		public event DeleteEventHandler DeleteEvent {
+			add {
+				Signal signal = Signal.Lookup (this, "delete-event", typeof(DeleteEventArgs));
+				signal.AddDelegate (value);
+			}
+			remove {
+				Signal signal = Signal.Lookup (this, "delete-event", typeof(DeleteEventArgs));
+				signal.RemoveDelegate (value);
+			}
+		}
+
+		[Signal ("key_press_event")]
+		//Signal is emitted when a key is pressed. 
+		public event KeyPressEventHandler KeyPressEvent {
+			add {
+				Signal signal = Signal.Lookup (this, "key_press_event", typeof(KeyPressEventArgs));
+				signal.AddDelegate (value);
+			}
+			remove {
+				Signal signal = Signal.Lookup (this, "key_press_event", typeof(KeyPressEventArgs));
+				signal.RemoveDelegate (value);
+			}
+		}
 		#endregion
 
 

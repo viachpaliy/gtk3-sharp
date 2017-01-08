@@ -329,10 +329,10 @@ namespace Gtk3{
 		//Whether the window should receive the input focus.
 		public bool AcceptFocus {
 			get {
-				return Window.gtk_window_get_accept_focus (base.Handle);
+				return Gtk3.Window.gtk_window_get_accept_focus (base.Handle);
 			}
 			set {
-				Window.gtk_window_set_accept_focus (base.Handle, value);
+				Gtk3.Window.gtk_window_set_accept_focus (base.Handle, value);
 			}
 		}
 
@@ -340,12 +340,12 @@ namespace Gtk3{
 		//The widget to which this window is attached. 
 		public Widget AttachedTo {
 			get {
-				IntPtr ptr = Window.gtk_window_get_attached_to (base.Handle);
+				IntPtr ptr = Gtk3.Window.gtk_window_get_attached_to (base.Handle);
 				return GLib.Object.GetObject (ptr) as Widget; 
 			}
 
 			set {
-				Window.gtk_window_set_attached_to(base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
+				Gtk3.Window.gtk_window_set_attached_to(base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
 			}
 
 		}
@@ -354,10 +354,10 @@ namespace Gtk3{
 		//Whether the window should be decorated by the window manager.
 		public bool Decorated {
 			get {
-				return Window.gtk_window_get_decorated (base.Handle);
+				return Gtk3.Window.gtk_window_get_decorated (base.Handle);
 			}
 			set {
-				Window.gtk_window_set_decorated (base.Handle, value);
+				Gtk3.Window.gtk_window_set_decorated (base.Handle, value);
 			}
 		}
 
@@ -397,10 +397,10 @@ namespace Gtk3{
 		//Whether the window frame should have a close button.
 		public bool Deletable {
 			get {
-				return Window.gtk_window_get_deletable (base.Handle);
+				return Gtk3.Window.gtk_window_get_deletable (base.Handle);
 			}
 			set {
-				Window.gtk_window_set_deletable (base.Handle, value);
+				Gtk3.Window.gtk_window_set_deletable (base.Handle, value);
 			}
 		}
 
@@ -408,10 +408,10 @@ namespace Gtk3{
 		//If this window should be destroyed when the parent is destroyed.
 		public bool DestroyWithParent {
 			get {
-				return Window.gtk_window_get_destroy_with_parent (base.Handle);
+				return Gtk3.Window.gtk_window_get_destroy_with_parent (base.Handle);
 			}
 			set {
-				Window.gtk_window_set_destroy_with_parent (base.Handle, value);
+				Gtk3.Window.gtk_window_set_destroy_with_parent (base.Handle, value);
 			}
 		}
 
@@ -419,10 +419,10 @@ namespace Gtk3{
 		//Whether the window should receive the input focus when mapped.
 		public bool FocusOnMap {
 			get {
-				return Window.gtk_window_get_focus_on_map (base.Handle);
+				return Gtk3.Window.gtk_window_get_focus_on_map (base.Handle);
 			}
 			set {
-				Window.gtk_window_set_focus_on_map (base.Handle, value);
+				Gtk3.Window.gtk_window_set_focus_on_map (base.Handle, value);
 			}
 		}
 
@@ -430,10 +430,10 @@ namespace Gtk3{
 		//The window gravity of the window. 
 		public Gdk.Gravity Gravity {
 			get {
-				return (Gdk.Gravity)Window.gtk_window_get_gravity (base.Handle);
+				return (Gdk.Gravity)Gtk3.Window.gtk_window_get_gravity (base.Handle);
 			}
 			set {
-				Window.gtk_window_set_gravity (base.Handle, (int)value);
+				Gtk3.Window.gtk_window_set_gravity (base.Handle, (int)value);
 			}
 		}
 
@@ -468,11 +468,11 @@ namespace Gtk3{
 		//Icon for this window.
 		public Pixbuf Icon {
 			get {
-				IntPtr o = Window.gtk_window_get_icon (base.Handle);
+				IntPtr o = Gtk3.Window.gtk_window_get_icon (base.Handle);
 				return GLib.Object.GetObject (o) as Pixbuf;
 			}
 			set {
-				Window.gtk_window_set_icon (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
+				Gtk3.Window.gtk_window_set_icon (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
 			}
 		}
 
@@ -480,12 +480,12 @@ namespace Gtk3{
 		[Property ("icon-name")]
 		public string IconName {
 			get {
-				IntPtr ptr = Window.gtk_window_get_icon_name (base.Handle);
+				IntPtr ptr = Gtk3.Window.gtk_window_get_icon_name (base.Handle);
 				return Marshaller.Utf8PtrToString (ptr);
 			}
 			set {
 				IntPtr intPtr = Marshaller.StringToPtrGStrdup (value);
-				Window.gtk_window_set_icon_name (base.Handle, intPtr);
+				Gtk3.Window.gtk_window_set_icon_name (base.Handle, intPtr);
 				Marshaller.Free (intPtr);
 			}
 		}
@@ -517,10 +517,10 @@ namespace Gtk3{
 		//If TRUE, the window is modal (other windows are not usable while this one is up).
 		public bool Modal {
 			get {
-				return Window.gtk_window_get_modal (base.Handle);
+				return Gtk3.Window.gtk_window_get_modal (base.Handle);
 			}
 			set {
-				Window.gtk_window_set_modal (base.Handle, value);
+				Gtk3.Window.gtk_window_set_modal (base.Handle, value);
 			}
 		}
 
@@ -528,10 +528,10 @@ namespace Gtk3{
 		//If TRUE, users can resize the window.
 		public bool Resizable {
 			get {
-				return Window.gtk_window_get_resizable (base.Handle);
+				return Gtk3.Window.gtk_window_get_resizable (base.Handle);
 			}
 			set {
-				Window.gtk_window_set_resizable (base.Handle, value);
+				Gtk3.Window.gtk_window_set_resizable (base.Handle, value);
 			}
 		}
 
@@ -555,11 +555,11 @@ namespace Gtk3{
 		//The screen where this window will be displayed.
 		public Gdk.Screen Screen {
 			get {
-				IntPtr o = Window.gtk_window_get_screen (base.Handle);
+				IntPtr o = Gtk3.Window.gtk_window_get_screen (base.Handle);
 				return GLib.Object.GetObject (o) as Gdk.Screen;
 			}
 			set {
-				Window.gtk_window_set_screen (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
+				Gtk3.Window.gtk_window_set_screen (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
 			}
 		}
 
@@ -567,10 +567,10 @@ namespace Gtk3{
 		//TRUE if the window should not be in the pager.
 		public bool SkipPagerHint {
 			get {
-				return Window.gtk_window_get_skip_pager_hint (base.Handle);
+				return Gtk3.Window.gtk_window_get_skip_pager_hint (base.Handle);
 			}
 			set {
-				Window.gtk_window_set_skip_pager_hint (base.Handle, value);
+				Gtk3.Window.gtk_window_set_skip_pager_hint (base.Handle, value);
 			}
 		}
 
@@ -578,10 +578,10 @@ namespace Gtk3{
 		//TRUE if the window should not be in the task bar.
 		public bool SkipTaskbarHint {
 			get {
-				return Window.gtk_window_get_skip_taskbar_hint (base.Handle);
+				return Gtk3.Window.gtk_window_get_skip_taskbar_hint (base.Handle);
 			}
 			set {
-				Window.gtk_window_set_skip_taskbar_hint (base.Handle, value);
+				Gtk3.Window.gtk_window_set_skip_taskbar_hint (base.Handle, value);
 			}
 		}
 
@@ -591,7 +591,7 @@ namespace Gtk3{
 		public string StartupId {
 			set {
 				IntPtr intPtr = Marshaller.StringToPtrGStrdup (value);
-				Window.gtk_window_set_startup_id (base.Handle, intPtr);
+				Gtk3.Window.gtk_window_set_startup_id (base.Handle, intPtr);
 				Marshaller.Free (intPtr);
 			}
 		}
@@ -600,12 +600,12 @@ namespace Gtk3{
 		//The title of the window.
 		public string Title {
 			get {
-				IntPtr ptr = Window.gtk_window_get_title (base.Handle);
+				IntPtr ptr = Gtk3.Window.gtk_window_get_title (base.Handle);
 				return Marshaller.Utf8PtrToString (ptr);
 			}
 			set {
 				IntPtr intPtr = Marshaller.StringToPtrGStrdup (value);
-				Window.gtk_window_set_title (base.Handle, intPtr);
+				Gtk3.Window.gtk_window_set_title (base.Handle, intPtr);
 				Marshaller.Free (intPtr);
 			}
 		}
@@ -614,11 +614,11 @@ namespace Gtk3{
 		//The transient parent of the window.
 		public Window TransientFor {
 			get {
-				IntPtr o = Window.gtk_window_get_transient_for (base.Handle);
+				IntPtr o = Gtk3.Window.gtk_window_get_transient_for (base.Handle);
 				return GLib.Object.GetObject (o) as Window;
 			}
 			set {
-				Window.gtk_window_set_transient_for (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
+				Gtk3.Window.gtk_window_set_transient_for (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
 			}
 		}
 
@@ -638,10 +638,10 @@ namespace Gtk3{
 		//Hint to help the desktop environment understand what kind of window this is and how to treat it.
 		public WindowTypeHint TypeHint {
 			get {
-				return (WindowTypeHint)Window.gtk_window_get_type_hint (base.Handle);
+				return (WindowTypeHint)Gtk3.Window.gtk_window_get_type_hint (base.Handle);
 			}
 			set {
-				Window.gtk_window_set_type_hint (base.Handle, (int)value);
+				Gtk3.Window.gtk_window_set_type_hint (base.Handle, (int)value);
 			}
 		}
 
@@ -649,10 +649,10 @@ namespace Gtk3{
 		//TRUE if the window should be brought to the user's attention.
 		public bool UrgencyHint {
 			get {
-				return Window.gtk_window_get_urgency_hint (base.Handle);
+				return Gtk3.Window.gtk_window_get_urgency_hint (base.Handle);
 			}
 			set {
-				Window.gtk_window_set_urgency_hint (base.Handle, value);
+				Gtk3.Window.gtk_window_set_urgency_hint (base.Handle, value);
 			}
 		}
 
@@ -676,11 +676,12 @@ namespace Gtk3{
 
 		public Window (WindowType type)
 		{
-			this.Raw = Window.gtk_window_new ((int)type);
+			this.Raw = Gtk3.Window.gtk_window_new ((int)type);
 		}
 
 		public Window (IntPtr raw) : base (raw)
 		{
+			this.Raw = raw;
 		}
 
 	}
