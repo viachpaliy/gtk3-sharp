@@ -20,6 +20,8 @@ namespace Gtk3 {
 
 		internal const string AtkNativeDll="libatk-1.0.so.0";
 
+		internal const string GioNativeDll = "libgio-2.0.so.0";
+
 		#region StyleProvider priority
 
 		internal const uint GTK_STYLE_PROVIDER_PRIORITY_FALLBACK = 1;

@@ -57,6 +57,32 @@ namespace Gtk3{
 		private static extern uint	gtk_css_section_get_start_position (IntPtr section);
 
 
+		[DllImport (Gtk3.Global.GioNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr g_file_new_for_path (IntPtr path);
+
+		#endregion
+
+		#region Methods
+
+		public void LoadFromFile(string file)
+		{
+			IntPtr fileNamePtr = Marshaller.StringToPtrGStrdup (file);
+
+			IntPtr g_file = g_file_new_for_path (fileNamePtr);
+
+			Gtk3.CssProvider.gtk_css_provider_load_from_file (this.Handle, g_file, IntPtr.Zero);
+
+			Marshaller.Free (fileNamePtr);
+			//Marshaller.Free (g_file);
+		}
+
+		public void LoadFromData(string data)
+		{
+			IntPtr dataPtr = Marshaller.StringToPtrGStrdup (data);
+			long length = (long)data.Length;
+			Gtk3.CssProvider.gtk_css_provider_load_from_data (this.Handle, dataPtr, length, IntPtr.Zero);
+			Marshaller.Free (dataPtr);
+				}
 		#endregion
 
 		#region Constructors

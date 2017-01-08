@@ -957,6 +957,16 @@ namespace Gtk3{
 
 
 		#endregion
+		#region Shapr widget's properties
+
+		public Gdk.Screen Screen {
+			get {
+				IntPtr o = Widget.gtk_widget_get_screen (base.Handle);
+				return GLib.Object.GetObject (o) as Gdk.Screen;
+			}
+		}
+
+		#endregion
 
 		public Atk.Object RefAccessible ()
 		{
@@ -989,48 +999,7 @@ namespace Gtk3{
 		}
 
 		#endregion
-		#region Callbacks for native signals
 
-		[CDeclCallback]
-		private delegate bool ButtonPressEventVMDelegate (IntPtr widget, IntPtr evnt);
-
-		private static Widget.ButtonPressEventVMDelegate ButtonPressEventVMCallback;
-
-		[DllImport ("/usr/lib/cli/gtk-sharp-2.0/libgtksharpglue-2.so")]
-		private static extern bool gtksharp_widget_base_button_press_event (IntPtr widget, IntPtr evnt);
-
-		[DllImport ("/usr/lib/cli/gtk-sharp-2.0/libgtksharpglue-2.so")]
-		private static extern void gtksharp_widget_override_button_press_event (IntPtr gtype, Widget.ButtonPressEventVMDelegate cb);
-
-
-		[DefaultSignalHandler (Type = typeof(Widget), ConnectionMethod = "OverrideButtonPressEvent")]
-		protected virtual bool OnButtonPressEvent (EventButton evnt)
-		{
-			return Widget.gtksharp_widget_base_button_press_event (base.Handle, (evnt != null) ? evnt.Handle : IntPtr.Zero);
-		}
-		private static bool buttonpressevent_cb (IntPtr widget, IntPtr evnt)
-		{
-			bool result;
-			try {
-				Widget widget2 = GLib.Object.GetObject (widget, false) as Widget;
-				result = widget2.OnButtonPressEvent (new EventButton (evnt));
-			}
-			catch (Exception ex) {
-				ExceptionManager.RaiseUnhandledException (ex, true);
-				throw ex;
-			}
-			return result;
-		}
-
-		private static void OverrideButtonPressEvent (GType gtype)
-		{
-			if (Widget.ButtonPressEventVMCallback == null) {
-				Widget.ButtonPressEventVMCallback = new Widget.ButtonPressEventVMDelegate (Widget.buttonpressevent_cb);
-			}
-			Widget.gtksharp_widget_override_button_press_event (gtype.Val, Widget.ButtonPressEventVMCallback);
-		}
-
-		#endregion
 
 		#region Native widget's signals
 
