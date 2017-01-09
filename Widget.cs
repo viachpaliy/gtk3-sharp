@@ -486,6 +486,11 @@ namespace Gtk3{
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern int gtk_widget_get_scale_factor (IntPtr raw);
 
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr gtk_widget_get_style_context (IntPtr raw);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_widget_reset_style (IntPtr raw);
 
 		#endregion
 
@@ -997,6 +1002,18 @@ namespace Gtk3{
 		{
 			Widget.gtk_widget_show_all (base.Handle);
 		}
+
+		public Gtk3.StyleContext GetStyleContext()
+		{
+			IntPtr o = Widget.gtk_widget_get_style_context (base.Handle);
+			return GLib.Object.GetObject (o) as Gtk3.StyleContext;
+		}
+
+		public void ResetStyle()
+		{
+			Widget.gtk_widget_reset_style (base.Handle);
+		}
+
 
 		#endregion
 

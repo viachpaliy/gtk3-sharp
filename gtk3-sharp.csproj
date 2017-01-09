@@ -78,6 +78,23 @@
     <Compile Include="CssProvider.cs" />
     <Compile Include="CssSectionType.cs" />
     <Compile Include="StyleContext.cs" />
+    <Compile Include="Bin.cs" />
+    <Compile Include="BaselinePosition.cs" />
+    <Compile Include="DeleteType.cs" />
+    <Compile Include="DirectionType.cs" />
+    <Compile Include="Justification.cs" />
+    <Compile Include="MovementStep.cs" />
+    <Compile Include="Orientation.cs" />
+    <Compile Include="PackType.cs" />
+    <Compile Include="PositionType.cs" />
+    <Compile Include="ReliefStyle.cs" />
+    <Compile Include="ScrollStep.cs" />
+    <Compile Include="ScrollType.cs" />
+    <Compile Include="SelectionMode.cs" />
+    <Compile Include="ShadowType.cs" />
+    <Compile Include="StateFlags.cs" />
+    <Compile Include="ToolbarStyle.cs" />
+    <Compile Include="SortType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

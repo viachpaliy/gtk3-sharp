@@ -5,7 +5,7 @@ using Gdk;
 
 namespace Gtk3{
 
-	public partial class Window:Widget{
+	public partial class Window:Bin{
 
 		#region import native functions
 
@@ -553,7 +553,7 @@ namespace Gtk3{
 
 		[Property ("screen")]
 		//The screen where this window will be displayed.
-		public Gdk.Screen Screen {
+		public new Gdk.Screen Screen {
 			get {
 				IntPtr o = Gtk3.Window.gtk_window_get_screen (base.Handle);
 				return GLib.Object.GetObject (o) as Gdk.Screen;

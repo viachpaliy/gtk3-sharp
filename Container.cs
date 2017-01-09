@@ -246,6 +246,38 @@ namespace Gtk3
 			return this.Children.GetEnumerator ();
 		}
 
+		public void Add (Widget widget)
+		{
+			Container.gtk_container_add (base.Handle, (widget != null) ? widget.Handle : IntPtr.Zero);
+		}
+
+		public void CheckResize ()
+		{
+			Container.gtk_container_check_resize (base.Handle);
+		}
+
+		public GLib.List GetChildren()
+		{
+			IntPtr o = Container.gtk_container_get_children (base.Handle);
+			return new GLib.List(o);
+		}
+
+		public void Remove (Widget widget)
+		{
+			Container.gtk_container_remove (base.Handle, (widget != null) ? widget.Handle : IntPtr.Zero);
+		}
+
+		public void ResizeChildren ()
+		{
+			Container.gtk_container_resize_children (base.Handle);
+		}
+
+		public void UnsetFocusChain ()
+		{
+			Container.gtk_container_unset_focus_chain (base.Handle);
+		}
+
+
 		#endregion
 
 		#region Constructors
