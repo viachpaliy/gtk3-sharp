@@ -24,6 +24,22 @@ namespace Test
 			win.ButtonPressEvent += delegate {
 				provider.LoadFromData ("#MyWindow {\n    background-color: #0F0;\n}");
 			};
+			win.KeyPressEvent += delegate(object o, KeyPressEventArgs arg) {
+				switch ((char)arg.Event.KeyValue) {
+				case 'r':
+					provider.LoadFromData ("#MyWindow {\n    background-color: #F00;\n}");
+					break;
+				case 'g':
+					provider.LoadFromData ("#MyWindow {\n    background-color: #0F0;\n}");
+					break;
+				case 'b':
+					provider.LoadFromData ("#MyWindow {\n    background-color: #00F;\n}");
+					break;
+				default:
+					provider.LoadFromData ("#MyWindow {\n    background-color: #F0F;\n}");
+					break;
+				}
+			};
 			win.DeleteEvent += delegate {
 				Gtk3.Application.Quit ();
 			};

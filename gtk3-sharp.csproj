@@ -95,6 +95,7 @@
     <Compile Include="StateFlags.cs" />
     <Compile Include="ToolbarStyle.cs" />
     <Compile Include="SortType.cs" />
+    <Compile Include="Builder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
