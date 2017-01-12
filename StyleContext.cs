@@ -14,7 +14,15 @@ namespace Gtk3{
 		[DllImport (Gtk3.Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void gtk_style_context_add_provider_for_screen (IntPtr screen, IntPtr provider, uint priority);
 
+		[DllImport (Gtk3.Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_style_context_add_provider (IntPtr context, IntPtr provider, uint priority);
 
+
+		#endregion
+
+		#region Constructors
+
+		public StyleContext(IntPtr raw):base(raw){}
 
 		#endregion
 
@@ -37,6 +45,14 @@ namespace Gtk3{
 
 		#endregion
 
+		#region Methods
+		public void AddProvider(CssProvider provider, uint priority)
+		{
+			Gtk3.StyleContext.gtk_style_context_add_provider (this.Handle, provider.Handle, priority);
+		}
+
+
+		#endregion
 
 
 	}

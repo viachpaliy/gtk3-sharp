@@ -96,6 +96,9 @@
     <Compile Include="ToolbarStyle.cs" />
     <Compile Include="SortType.cs" />
     <Compile Include="Builder.cs" />
+    <Compile Include="Box.cs" />
+    <Compile Include="Button.cs" />
+    <Compile Include="IconSize.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

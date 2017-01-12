@@ -1006,7 +1006,11 @@ namespace Gtk3{
 		public Gtk3.StyleContext GetStyleContext()
 		{
 			IntPtr o = Widget.gtk_widget_get_style_context (base.Handle);
-			return GLib.Object.GetObject (o) as Gtk3.StyleContext;
+			Gtk3.StyleContext context= GLib.Object.GetObject (o) as Gtk3.StyleContext;
+			if (context == null) {
+				context = new StyleContext (o);
+			}
+			return context;
 		}
 
 		public void ResetStyle()

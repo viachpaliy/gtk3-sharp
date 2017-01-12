@@ -76,6 +76,15 @@ namespace Gtk3{
 			//Marshaller.Free (g_file);
 		}
 
+		public void LoadFromTextFile(string file)
+		{
+			string data = System.IO.File.ReadAllText (file);
+			IntPtr dataPtr = Marshaller.StringToPtrGStrdup (data);
+			long length = (long)data.Length;
+			Gtk3.CssProvider.gtk_css_provider_load_from_data (this.Handle, dataPtr, length, IntPtr.Zero);
+			Marshaller.Free (dataPtr);
+		}
+
 		public void LoadFromData(string data)
 		{
 			IntPtr dataPtr = Marshaller.StringToPtrGStrdup (data);

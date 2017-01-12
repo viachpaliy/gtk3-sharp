@@ -62,6 +62,12 @@ namespace Gtk3
 			return new Builder (o);
 		}
 
+		public static Builder FromTextFile(string filename)
+		{
+			string XMLtext = System.IO.File.ReadAllText (filename);
+			return Builder.FromString (XMLtext);
+		}
+
 		public static Builder FromString (string XMLstring)
 		{
 			IntPtr intPtr = Marshaller.StringToPtrGStrdup (XMLstring);
@@ -79,6 +85,19 @@ namespace Gtk3
 			IntPtr zero = IntPtr.Zero;
 			uint num = Builder.gtk_builder_add_from_file (base.Handle, intPtr, out zero);
 			//uint result = num;
+			Marshaller.Free (intPtr);
+			if (zero != IntPtr.Zero) {
+				throw new GException (zero);
+			}
+			return num;
+		}
+
+		public uint AddFromTextFile(string filename)
+		{
+			string buffer = System.IO.File.ReadAllText (filename);
+			IntPtr intPtr = Marshaller.StringToPtrGStrdup (buffer);
+			IntPtr zero = IntPtr.Zero;
+			uint num = Builder.gtk_builder_add_from_string (base.Handle, intPtr,(long)Encoding.UTF8.GetByteCount (buffer), out zero);
 			Marshaller.Free (intPtr);
 			if (zero != IntPtr.Zero) {
 				throw new GException (zero);
@@ -136,6 +155,16 @@ namespace Gtk3
 			GLib.Object @object = GLib.Object.GetObject (o);
 			Marshaller.Free (intPtr);
 			return @object;
+		}
+
+		public Gtk3.Widget GetWidget (string name)
+		{
+			IntPtr intPtr = Marshaller.StringToPtrGStrdup (name);
+			IntPtr o = Builder.gtk_builder_get_object (base.Handle, intPtr);
+			Gtk3.Widget widget = GLib.Object.GetObject (o) as Gtk3.Widget;
+			if(widget==null) {widget = new Gtk3.Widget (o);}
+			Marshaller.Free (intPtr);
+			return widget;
 		}
 
 		//
