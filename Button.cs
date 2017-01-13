@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Gtk
+namespace Gtk3
 {
 	public class Button : Bin
 	{
@@ -48,7 +48,7 @@ namespace Gtk
 		public Widget Image {
 			get {
 				IntPtr o = Button.gtk_button_get_image (base.Handle);
-				return Object.GetObject (o) as Widget;
+				return GLib.Object.GetObject (o) as Widget;
 			}
 			set {
 				Button.gtk_button_set_image (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);

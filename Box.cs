@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace Gtk3
 {
-	public class Box : Container
+	public class Box : Container,IOrientable
 	{
 
 		//
@@ -18,6 +18,20 @@ namespace Gtk3
 		public Box (Orientation orientation, int spasing): base (IntPtr.Zero){
 
 			this.Raw = Box.gtk_box_new ((int)orientation, spasing);
+		}
+
+		//
+		//  IOrientable interface
+		//
+
+		 void IOrientable.SetOrientation(Orientation orientation)
+		{
+			Box.gtk_orientable_set_orientation (base.Handle, (int)orientation);
+		}
+
+		 Orientation IOrientable.GetOrientation()
+		{
+			return (Orientation)Box.gtk_orientable_get_orientation (base.Handle);
 		}
 
 		//
@@ -97,6 +111,13 @@ namespace Gtk3
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void gtk_box_set_spacing (IntPtr raw, int spacing);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern int gtk_orientable_get_orientation (IntPtr raw);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_orientable_set_orientation (IntPtr raw, int orientation);
+
 
 		//
 		// Methods

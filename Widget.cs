@@ -600,9 +600,9 @@ namespace Gtk3{
 
 		[Property ("halign")]
 		//How to distribute horizontal space if widget gets extra space, see GtkAlign
-		public GtkAlign Halign {
+		public Align Halign {
 			get {
-				return (GtkAlign)Widget.gtk_widget_get_halign (base.Handle);
+				return (Align)Widget.gtk_widget_get_halign (base.Handle);
 			}
 			set {
 				Widget.gtk_widget_set_halign (base.Handle, (int)value);
@@ -888,9 +888,9 @@ namespace Gtk3{
 
 		[Property ("valign")]
 		//How to distribute vertical space if widget gets extra space.
-		public GtkAlign Valign {
+		public Align Valign {
 			get {
-				return (GtkAlign)Widget.gtk_widget_get_valign (base.Handle);
+				return (Align)Widget.gtk_widget_get_valign (base.Handle);
 			}
 			set {
 				Widget.gtk_widget_set_valign (base.Handle, (int)value);

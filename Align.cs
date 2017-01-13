@@ -2,7 +2,7 @@
 
 namespace Gtk3
 {
-	public enum GtkAlign
+	public enum Align
 	{
 		GTK_ALIGN_FILL,		//stretch to fill all space if possible, center if no meaningful way to stretch
 
