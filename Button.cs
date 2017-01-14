@@ -29,6 +29,15 @@ namespace Gtk3
 			Marshaller.Free (intPtr);
 		}
 
+		public Button (string iconName, IconSize size)
+		{
+			IntPtr intPtr = Marshaller.StringToPtrGStrdup (iconName);
+			this.Raw = Button.gtk_button_new_from_icon_name (intPtr, (int)size);
+			Marshaller.Free (intPtr);
+		}
+
+
+
 
 		//
 		// Properties

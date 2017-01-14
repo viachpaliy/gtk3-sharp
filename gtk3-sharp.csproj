@@ -100,6 +100,7 @@
     <Compile Include="IconSize.cs" />
     <Compile Include="Align.cs" />
     <Compile Include="IOrientable.cs" />
+    <Compile Include="IBuildable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

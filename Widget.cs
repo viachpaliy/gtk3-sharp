@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace Gtk3{
 
 	[TypeInitializer (typeof(Widget), "ClassInit")]
-	public class Widget:GLib.InitiallyUnowned, Implementor, IWrapper{
+	public class Widget:GLib.InitiallyUnowned,IBuildable, Implementor, IWrapper{
 					
 			
 		#region Gtk+2 native  functions
@@ -494,6 +494,98 @@ namespace Gtk3{
 
 		#endregion
 
+		#region IBuildable implementation
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_buildable_set_name (IntPtr buildable, IntPtr name);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr gtk_buildable_get_name (IntPtr buildable);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_buildable_add_child (IntPtr buildable, IntPtr builder, IntPtr child, IntPtr type);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr gtk_buildable_construct_child (IntPtr buildable, IntPtr builder, IntPtr name);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_buildable_custom_tag_end (IntPtr buildable, IntPtr builder, IntPtr child, IntPtr tagname, IntPtr data);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_buildable_custom_finished (IntPtr buildable, IntPtr builder, IntPtr child, IntPtr tagname, IntPtr data);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_buildable_parser_finished (IntPtr buildable, IntPtr builder);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr gtk_buildable_get_internal_child (IntPtr buildable, IntPtr builder, IntPtr childname);
+
+		void IBuildable.SetName (string name)
+		{
+			IntPtr namePtr = Marshaller.StringToPtrGStrdup (name);
+			Widget.gtk_buildable_set_name (base.Handle, namePtr);
+			Marshaller.Free (namePtr);
+		}
+
+		string IBuildable.GetName()
+		{
+			IntPtr namePtr=Widget.gtk_buildable_get_name(base.Handle);
+			return Marshaller.Utf8PtrToString (namePtr);
+		}
+
+		void IBuildable.AddChild (Builder builder,Widget child, string type)
+		{
+			IntPtr typePtr = Marshaller.StringToPtrGStrdup (type);
+			Widget.gtk_buildable_add_child (base.Handle, builder.Handle, child.Handle, typePtr);
+			Marshaller.Free (typePtr);
+		}
+
+		void IBuildable.AddChild (Builder builder,Widget child)
+		{
+			Widget.gtk_buildable_add_child (base.Handle, builder.Handle, child.Handle, IntPtr.Zero);
+		}
+
+		GLib.Object IBuildable.ConstructChild (Builder builder, string name)
+		{
+			IntPtr namePtr = Marshaller.StringToPtrGStrdup (name);
+			IntPtr o=Widget.gtk_buildable_construct_child (base.Handle, builder.Handle, namePtr);
+			Marshaller.Free (namePtr);
+			return GLib.Object.GetObject (o);
+
+		}
+
+		void IBuildable.CustomTagEnd (Builder builder, Widget child, string tagname, string data)
+		{
+			IntPtr tagnamePtr = Marshaller.StringToPtrGStrdup (tagname);
+			IntPtr dataPtr = Marshaller.StringToPtrGStrdup (data);
+			Widget.gtk_buildable_custom_tag_end (base.Handle, builder.Handle, child.Handle, tagnamePtr, dataPtr);
+			Marshaller.Free (tagnamePtr);
+			Marshaller.Free (dataPtr);
+		}	
+
+		void IBuildable.CustomFinished (Builder builder, Widget child, string tagname, string data)
+		{
+			IntPtr tagnamePtr = Marshaller.StringToPtrGStrdup (tagname);
+			IntPtr dataPtr = Marshaller.StringToPtrGStrdup (data);
+			Widget.gtk_buildable_custom_finished(base.Handle, builder.Handle, child.Handle, tagnamePtr, dataPtr);
+			Marshaller.Free (tagnamePtr);
+			Marshaller.Free (dataPtr);
+		}
+
+		void IBuildable.ParserFinished (Builder builder)
+		{
+			Widget.gtk_buildable_parser_finished (base.Handle, builder.Handle);
+		}
+
+		GLib.Object IBuildable.GetInternalChild (Builder builder, string childname)
+		{
+			IntPtr namePtr = Marshaller.StringToPtrGStrdup (childname);
+			IntPtr o=Widget.gtk_buildable_get_internal_child (base.Handle, builder.Handle, namePtr);
+			Marshaller.Free (namePtr);
+			return GLib.Object.GetObject (o);
+		}
+
+		#endregion
 
 
 		#region Native widget's properties
