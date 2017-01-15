@@ -1156,7 +1156,20 @@ namespace Gtk3{
 			}
 		}
 
-	
+		[Signal ("can-activate-accel")]
+		//Determines whether an accelerator that activates the signal
+		//identified by signal_id can currently be activated. 
+		public event CanActivateAccelHandler CanActivateAccel{
+			add {
+				Signal signal = Signal.Lookup (this, "can-activate-accel", typeof(CanActivateAccelArgs));
+				signal.AddDelegate (value);
+			}
+			remove {
+				Signal signal = Signal.Lookup (this, "can-activate-accel", typeof(CanActivateAccelArgs));
+				signal.RemoveDelegate (value);
+			}
+		}
+
 
 		[Signal ("child-notify")]
 		//Signal is emitted for each child property that has changed on an object. 
@@ -1212,15 +1225,15 @@ namespace Gtk3{
 			}
 		}
 
-		[Signal ("key_press_event")]
+		[Signal ("key-press-event")]
 		//Signal is emitted when a key is pressed. 
 		public event KeyPressEventHandler KeyPressEvent {
 			add {
-				Signal signal = Signal.Lookup (this, "key_press_event", typeof(KeyPressEventArgs));
+				Signal signal = Signal.Lookup (this, "key-press-event", typeof(KeyPressEventArgs));
 				signal.AddDelegate (value);
 			}
 			remove {
-				Signal signal = Signal.Lookup (this, "key_press_event", typeof(KeyPressEventArgs));
+				Signal signal = Signal.Lookup (this, "key-press-event", typeof(KeyPressEventArgs));
 				signal.RemoveDelegate (value);
 			}
 		}

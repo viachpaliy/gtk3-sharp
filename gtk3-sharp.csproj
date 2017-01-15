@@ -101,6 +101,10 @@
     <Compile Include="Align.cs" />
     <Compile Include="IOrientable.cs" />
     <Compile Include="IBuildable.cs" />
+    <Compile Include="Fixed.cs" />
+    <Compile Include="Adjustment.cs" />
+    <Compile Include="CanActivateAccelHandler.cs" />
+    <Compile Include="CanActivateAccelArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
