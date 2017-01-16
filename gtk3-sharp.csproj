@@ -105,6 +105,8 @@
     <Compile Include="Adjustment.cs" />
     <Compile Include="CanActivateAccelHandler.cs" />
     <Compile Include="CanActivateAccelArgs.cs" />
+    <Compile Include="Revealer.cs" />
+    <Compile Include="RevealerTransitionType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
