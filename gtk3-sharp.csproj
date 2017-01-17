@@ -107,6 +107,7 @@
     <Compile Include="CanActivateAccelArgs.cs" />
     <Compile Include="Revealer.cs" />
     <Compile Include="RevealerTransitionType.cs" />
+    <Compile Include="Grid.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

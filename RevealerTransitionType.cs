@@ -4,17 +4,17 @@ namespace Gtk3
 {
 	public enum RevealerTransitionType
 	{
-		GTK_REVEALER_TRANSITION_TYPE_NONE,	//No transition
+		None,//GTK_REVEALER_TRANSITION_TYPE_NONE  No transition
 
-		GTK_REVEALER_TRANSITION_TYPE_CROSSFADE,	//Fade in
+		Crossfade,//GTK_REVEALER_TRANSITION_TYPE_CROSSFADE	Fade in
 
-		GTK_REVEALER_TRANSITION_TYPE_SLIDE_RIGHT,	//Slide in from the left
+		SlideRight,//GTK_REVEALER_TRANSITION_TYPE_SLIDE_RIGHT   Slide in from the left
 
-		GTK_REVEALER_TRANSITION_TYPE_SLIDE_LEFT,	//Slide in from the right
+		SlideLeft,//GTK_REVEALER_TRANSITION_TYPE_SLIDE_LEFT  Slide in from the right
 
-		GTK_REVEALER_TRANSITION_TYPE_SLIDE_UP,	//	Slide in from the bottom
+		SlideUp,//GTK_REVEALER_TRANSITION_TYPE_SLIDE_UP		Slide in from the bottom
 
-		GTK_REVEALER_TRANSITION_TYPE_SLIDE_DOWN	//Slide in from the top
+		SlideDown//GTK_REVEALER_TRANSITION_TYPE_SLIDE_DOWN	S lide in from the top
 	}
 }
 

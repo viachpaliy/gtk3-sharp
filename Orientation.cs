@@ -4,9 +4,9 @@ namespace Gtk3
 {
 	public enum Orientation
 	{
-		GTK_ORIENTATION_HORIZONTAL,		//The element is in horizontal orientation.
+		Horizontal,//GTK_ORIENTATION_HORIZONTAL		The element is in horizontal orientation.
 
-		GTK_ORIENTATION_VERTICAL		//The element is in vertical orientation.
+		Vertical//GTK_ORIENTATION_VERTICAL		The element is in vertical orientation.
 	}
 }
 
