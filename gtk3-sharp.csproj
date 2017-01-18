@@ -108,6 +108,8 @@
     <Compile Include="Revealer.cs" />
     <Compile Include="RevealerTransitionType.cs" />
     <Compile Include="Grid.cs" />
+    <Compile Include="Calendar.cs" />
+    <Compile Include="CalendarDisplayOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
