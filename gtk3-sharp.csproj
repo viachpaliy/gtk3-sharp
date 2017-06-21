@@ -110,6 +110,7 @@
     <Compile Include="Grid.cs" />
     <Compile Include="Calendar.cs" />
     <Compile Include="CalendarDisplayOptions.cs" />
+    <Compile Include="DialogFlags.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
