@@ -64,9 +64,32 @@ namespace Gtk3
 		{
 		}
 
-		//
-		//
-		//
+		#region Properties
+		///<summary>
+		/// The selected day (as a number between 1 and 31, or 0 to unselect the currently selected day).
+		/// </summary>
+		[Property ("day")]
+		public int Day {
+			get{ 
+				GLib.Value property = base.GetProperty ("day");
+				int result = (int)property;
+				property.Dispose ();
+				return result;
+			}
+			set{
+				GLib.Value val = new GLib.Value (value);
+				base.SetProperty ("day", val);
+				val.Dispose ();
+			}
+		
+		}
+
+
+
+
+
+		#endregion
+
 
 
 	}
