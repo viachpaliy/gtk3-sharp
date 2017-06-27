@@ -111,6 +111,7 @@
     <Compile Include="Calendar.cs" />
     <Compile Include="CalendarDisplayOptions.cs" />
     <Compile Include="DialogFlags.cs" />
+    <Compile Include="ShortcutsWindow.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
