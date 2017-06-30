@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2017 Author : Viacheslav Paliy
+// Copyright (c) 2017 Author : Viacheslav Paliy
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -25,17 +25,28 @@ using System;
 namespace Gtk3
 {
 	/// <summary>
-	/// A GtkWindow can be one of these types.
+	///  Determines the directions in which the size group affects the requested sizes of its component widgets.
 	/// </summary>
-	public enum WindowType
+	public enum SizeGroupMode
 	{
-		/// <summary>
-		/// A regular window, such as a dialog.
-		/// </summary>
-		Toplevel,
-		/// <summary>
-		/// A special window such as a tooltip.
-		/// </summary>
-		Popup
+	/// <summary>
+	/// group has no effect		  	/// <summary>
+	None,// GTK_SIZE_GROUP_NONE
+	/// <summary>
+	/// group affects horizontal requisition
+	/// <summary>
+	Horizontal,// GTK_SIZE_GROUP_HORIZONTAL
+	/// <summary>
+	/// group affects vertical requisition 
+	/// <summary>
+	Vertical,// GTK_SIZE_GROUP_VERTICAL
+	///<summary>
+	///group affects both horizontal and vertical requisition 
+	///<summary>
+	Both// GTK_SIZE_GROUP_BOTH
 	}
 }
+
+
+
+

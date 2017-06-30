@@ -112,6 +112,7 @@
     <Compile Include="CalendarDisplayOptions.cs" />
     <Compile Include="DialogFlags.cs" />
     <Compile Include="ShortcutsWindow.cs" />
+    <Compile Include="SizeGroupMode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

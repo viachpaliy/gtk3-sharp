@@ -1,16 +1,50 @@
-﻿using System;
+﻿// Copyright (c) 2017 Author : Viacheslav Paliy
+//
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to
+// the following conditions:
+// 
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+//
+using System;
 
 namespace Gtk3
 {
+	/// <summary>
+	/// Used to control what selections users are allowed to make.
+	/// </summary>
 	public enum SelectionMode
 	{
-		GTK_SELECTION_NONE,		//No selection is possible.
-
-		GTK_SELECTION_SINGLE,	//Zero or one element may be selected.
-
-		GTK_SELECTION_BROWSE,	//Exactly one element is selected. 
-
-		GTK_SELECTION_MULTIPLE	//Any number of elements may be selected. 
+		/// <summary>
+		/// No selection is possible.
+		/// </summary>
+		None,//GTK_SELECTION_NONE
+		/// <summary>
+		/// Zero or one element may be selected.
+		/// </summary>
+		Single,//GTK_SELECTION_SINGLE
+		/// <summary>
+		/// Exactly one element is selected.
+		/// </summary>
+		Browse,//GTK_SELECTION_BROWSE 
+		/// <summary>
+		/// Any number of elements may be selected.
+		/// </summary>
+		Multiple//GTK_SELECTION_MULTIPLE	 
 	}
 }
 
