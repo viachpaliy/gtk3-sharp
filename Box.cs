@@ -1,4 +1,26 @@
-﻿using GLib;
+﻿// Copyright (c) 2017 Author : Viacheslav Paliy
+//
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to
+// the following conditions:
+// 
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+//
+using GLib;
 using System;
 using System.Runtime.InteropServices;
 
@@ -90,6 +112,22 @@ namespace Gtk3
 			}
 		}
 
+		///<summary>
+		///Sets a center widget; that is a child widget that will be
+		///centered with respect to the full width of the box, even
+		///if the children at either side take up different amounts of space.
+		///<summary>
+		public Gtk3.Widget CenterWidget {
+			get{	
+				IntPtr o=Box.gtk_box_get_center_widget (base.Handle);
+				Gtk3.Widget widget=GLib.Object.GetObject(o)  as Gtk3.Widget;
+				if (o!=null & widget==null) {widget = new Gtk3.Widget(o);}
+				return widget;
+			}
+			set{
+				Box.gtk_box_set_center_widget (base.Handle, value.Handle);
+			}
+		}
 		#endregion
 
 		#region Static Methods
@@ -136,6 +174,11 @@ namespace Gtk3
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void gtk_orientable_set_orientation (IntPtr raw, int orientation);
 
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern IntPtr gtk_box_get_center_widget (IntPtr raw);
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_box_set_center_widget (IntPtr raw, IntPtr widget);
 		#endregion
 
 		#region Public Methods
