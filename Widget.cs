@@ -1,4 +1,26 @@
-﻿using Atk;
+﻿// Copyright (c) 2017 Author : Viacheslav Paliy
+//
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to
+// the following conditions:
+// 
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+//
+using Atk;
 using Gdk;
 using GLib;
 using Pango;
@@ -8,11 +30,13 @@ using System.Runtime.InteropServices;
 
 namespace Gtk3{
 
-	[TypeInitializer (typeof(Widget), "ClassInit")]
+	/// <summary>
+	///  Base class for all widgets.
+	/// </summary>
 	public class Widget:GLib.InitiallyUnowned,IBuildable, Implementor, IWrapper{
 					
 			
-		#region Gtk+2 native  functions
+		#region Private Static Methods
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern bool gtk_widget_activate (IntPtr raw);
@@ -413,10 +437,6 @@ namespace Gtk3{
 		[DllImport (Global.AtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr atk_implementor_ref_accessible (IntPtr raw);
 
-		#endregion
-
-		#region Gtk+3 native functions
-
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern int gtk_widget_get_halign (IntPtr raw);
 
@@ -588,11 +608,14 @@ namespace Gtk3{
 		#endregion
 
 
-		#region Native widget's properties
-
+		#region Properties
+	
+		/// <summary>
+		/// //Whether the application will paint directly on the widget.
+		/// </summary>
+		/// <value><c>true</c> if app will paint directly on the widget; otherwise, <c>false</c>.</value>
 		[Property ("app-paintable")]
-		//Whether the application will paint directly on the widget.
-		public bool AppPaintable {
+			public bool AppPaintable {
 			get {
 				GLib.Value property = base.GetProperty ("app-paintable");
 				bool result = (bool)property;
@@ -604,8 +627,11 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// Whether the widget can be the default widget.
+		/// </summary>
+		/// <value><c>true</c> if this widget can default widget; otherwise, <c>false</c>.</value>
 		[Property ("can-default")]
-		//Whether the widget can be the default widget.
 		public bool CanDefault {
 			get {
 				GLib.Value property = base.GetProperty ("can-default");
@@ -620,8 +646,11 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// Whether the widget can accept the input focus.
+		/// </summary>
+		/// <value><c>true</c> if this widget can accept the input focus.; otherwise, <c>false</c>.</value>
 		[Property ("can-focus")]
-		//Whether the widget can accept the input focus.
 		public bool CanFocus {
 			get {
 				GLib.Value property = base.GetProperty ("can-focus");
@@ -636,8 +665,11 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// //Whether the widget is part of a composite widget.
+		/// </summary>
+		/// <value><c>true</c> if this widget is part of a composite widget; otherwise, <c>false</c>.</value>
 		[Property ("composite-child")]
-		//Whether the widget is part of a composite widget.
 		public bool CompositeChild {
 			get {
 				GLib.Value property = base.GetProperty ("composite-child");
@@ -647,8 +679,11 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// The event mask that decides what kind of GdkEvents this widget gets.
+		/// </summary>
+		/// <value>The event mask.</value>
 		[Property ("events")]
-		//The event mask that decides what kind of GdkEvents this widget gets.
 		public EventMask Events {
 			get {
 				return (EventMask)Widget.gtk_widget_get_events (base.Handle);
@@ -658,8 +693,11 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// Whether to expand in both directions. Setting this sets both “hexpand” and “vexpand”
+		/// </summary>
+		/// <value><c>true</c> if expand; otherwise, <c>false</c>.</value>
 		[Property ("expand")]
-		//Whether to expand in both directions. Setting this sets both “hexpand” and “vexpand”
 		public bool Expand {
 			get {
 				GLib.Value property = base.GetProperty ("expand");
@@ -674,8 +712,10 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// Whether the widget should grab focus when it is clicked with the mouse.
+		/// </summary>
 		[Property ("focus-on-click")]
-		//Whether the widget should grab focus when it is clicked with the mouse.
 		public bool FocusOnClick {
 			get {
 				GLib.Value property = base.GetProperty ("focus-on-click");
@@ -690,8 +730,10 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// How to distribute horizontal space if widget gets extra space.
+		/// </summary>
 		[Property ("halign")]
-		//How to distribute horizontal space if widget gets extra space, see GtkAlign
 		public Align Halign {
 			get {
 				return (Align)Widget.gtk_widget_get_halign (base.Handle);
@@ -701,9 +743,11 @@ namespace Gtk3{
 			}
 		}
 
-
+		/// <summary>
+		/// Whether the widget is the default widget.
+		/// </summary>
+		/// <value><c>true</c> if this widget is the default widget; otherwise, <c>false</c>.</value>
 		[Property ("has-default")]
-		//Whether the widget is the default widget.
 		public bool HasDefault {
 			get {
 				GLib.Value property = base.GetProperty ("has-default");
@@ -718,9 +762,11 @@ namespace Gtk3{
 			}
 		}
 
-
+		/// <summary>
+		/// Whether the widget has the input focus.
+		/// </summary>
+		/// <value><c>true</c> if this widget has the input focus; otherwise, <c>false</c>.</value>
 		[Property ("has-focus")]
-		//Whether the widget has the input focus.
 		public bool HasFocus {
 			get {
 				GLib.Value property = base.GetProperty ("has-focus");
@@ -735,8 +781,13 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// Enables or disables the emission of “query-tooltip” on widget .
+		/// </summary>
+		/// <value><c>true</c>  indicates that widget can have a tooltip,
+		///  in this case the widget will be queried using “query-tooltip” 
+		/// to determine whether it will provide a tooltip or not.</value>
 		[Property ("has-tooltip")]
-		//Enables or disables the emission of “query-tooltip” on widget .
 		public bool HasTooltip {
 			get {
 				return Widget.gtk_widget_get_has_tooltip (base.Handle);
@@ -746,9 +797,11 @@ namespace Gtk3{
 			}
 		}
 
-
+		/// <summary>
+		/// Override for height request of the widget, or -1 if natural request should be used.
+		/// </summary>
+		/// <value>Allowed values: >= -1.Default value: -1 </value>
 		[Property ("height-request")]
-		//Override for height request of the widget, or -1 if natural request should be used.
 		public int HeightRequest {
 			get {
 				GLib.Value property = base.GetProperty ("height-request");
@@ -763,8 +816,10 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// Whether to expand horizontally. 
+		/// </summary>
 		[Property ("hexpand")]
-		//Whether to expand horizontally. 
 		public bool Hexpand {
 			get {
 				return Widget.gtk_widget_get_hexpand(base.Handle);
@@ -774,8 +829,10 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// Whether to use the “hexpand” property.
+		/// </summary>
 		[Property ("hexpand-set")]
-		//Whether to use the “hexpand” property.
 		public bool HexpandSet {
 			get {
 				return Widget.gtk_widget_get_hexpand_set(base.Handle);
@@ -786,8 +843,10 @@ namespace Gtk3{
 		}
 
 
+		/// <summary>
+		/// Whether the widget is the focus widget within the toplevel.
+		/// </summary>
 		[Property ("is-focus")]
-		//Whether the widget is the focus widget within the toplevel.
 		public bool IsFocus {
 			get {
 				return Widget.gtk_widget_is_focus (base.Handle);
@@ -799,8 +858,11 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// Sets all four sides' margin at once. If read, returns max margin on any side.
+		/// </summary>
+		/// <value>The margin.</value>
 		[Property ("margin")]
-		//Sets all four sides' margin at once. If read, returns max margin on any side.
 		public int Margin {
 			get {
 				GLib.Value property = base.GetProperty ("margin");
@@ -815,8 +877,10 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// Margin on bottom side of widget.
+		/// </summary>
 		[Property ("margin-bottom")]
-		//Margin on bottom side of widget.
 		public int MarginBottom {
 			get {
 				return Widget.gtk_widget_get_margin_bottom(base.Handle);
@@ -826,8 +890,10 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// Margin on end of widget, horizontally. 
+		/// </summary>
 		[Property ("margin-end")]
-		//Margin on end of widget, horizontally. 
 		public int MarginEnd {
 			get {
 				return Widget.gtk_widget_get_margin_end(base.Handle);
@@ -837,8 +903,10 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// Margin on start of widget, horizontally.  
+		/// </summary>
 		[Property ("margin-start")]
-		//Margin on start of widget, horizontally.  
 		public int MarginStart {
 			get {
 				return Widget.gtk_widget_get_margin_start(base.Handle);
@@ -848,8 +916,10 @@ namespace Gtk3{
 			}
 		}
 
-		[Property ("margin-top")]
-		//Margin on top side of widget.
+		/// <summary>
+		/// Margin on top side of widget.
+		/// </summary>
+        [Property ("margin-top")]
 		public int MarginTop {
 			get {
 				return Widget.gtk_widget_get_margin_top(base.Handle);
@@ -859,8 +929,11 @@ namespace Gtk3{
 			}
 		}
 
+
+		/// <summary>
+		///The name of the widget.
+		/// </summary>
 		[Property ("name")]
-		//The name of the widget.
 		public string Name {
 			get {
 				IntPtr ptr = Widget.gtk_widget_get_name (base.Handle);
@@ -873,9 +946,10 @@ namespace Gtk3{
 			}
 		}
 
-
+		/// <summary>
+		/// Whether gtk_widget_show_all() should not affect this widget.
+		/// </summary>
 		[Property ("no-show-all")]
-		//Whether gtk_widget_show_all() should not affect this widget.
 		public bool NoShowAll {
 			get {
 				return Widget.gtk_widget_get_no_show_all (base.Handle);
@@ -884,9 +958,11 @@ namespace Gtk3{
 				Widget.gtk_widget_set_no_show_all (base.Handle, value);
 			}
 		}
-
+		
+		/// <summary>
+		/// The requested opacity of the widget. 
+		/// </summary>
 		[Property ("opacity")]
-		//The requested opacity of the widget. 
 		public double Opacity {
 			get{
 				return Widget.gtk_widget_get_opacity (base.Handle);
@@ -895,23 +971,25 @@ namespace Gtk3{
 				Widget.gtk_widget_set_opacity (base.Handle, value);
 			}
 		}
-
-
+	
+		/// <summary>
+		///The parent widget of this widget. Must be a Container widget.
+		/// </summary>
 		[Property ("parent")]
-		//The parent widget of this widget. Must be a Container widget.
 		public Container Parent {
 			get {
-				IntPtr o = Widget.gtk_widget_get_parent (base.Handle);
+			IntPtr o = Widget.gtk_widget_get_parent (base.Handle);
 				return GLib.Object.GetObject(o) as Container;
 			}
 			set {
 				Widget.gtk_widget_set_parent (base.Handle, (value != null) ? value.Handle : IntPtr.Zero);
 			}
 		}
-
-
+		
+		/// <summary>
+		///If TRUE, the widget will receive the default action when it is focused.
+		/// </summary>
 		[Property ("receives-default")]
-		//If TRUE, the widget will receive the default action when it is focused.
 		public bool ReceivesDefault {
 			get {
 				GLib.Value property = base.GetProperty ("receives-default");
@@ -925,18 +1003,22 @@ namespace Gtk3{
 				val.Dispose ();
 			}
 		}
-
+		
+		/// <summary>
+		///Retrieves the internal scale factor that maps from window coordinates to the actual device pixels.
+		///On traditional systems this is 1, on high density outputs, it can be a higher value (typically 2).
+		/// </summary>
 		[Property ("scale-factor")]
-		//Retrieves the internal scale factor that maps from window coordinates to the actual device pixels.
-		//On traditional systems this is 1, on high density outputs, it can be a higher value (typically 2).
 		public int ScaleFactor {
 			get{
 				return Widget.gtk_widget_get_scale_factor (base.Handle);
 			}
 		}
 
+		/// <summary>
+		///Whether the widget responds to input.
+		/// </summary>
 		[Property ("sensitive")]
-		//Whether the widget responds to input.
 		public bool Sensitive {
 			get {
 				GLib.Value property = base.GetProperty ("sensitive");
@@ -948,9 +1030,11 @@ namespace Gtk3{
 				Widget.gtk_widget_set_sensitive (base.Handle, value);
 			}
 		}
-
+	
+		/// <summary>
+		///Sets the text of tooltip to be the given string, which is marked up with the Pango text markup language.
+		/// </summary>
 		[Property ("tooltip-markup")]
-		//Sets the text of tooltip to be the given string, which is marked up with the Pango text markup language.
 		public string TooltipMarkup {
 			get {
 				IntPtr ptr = Widget.gtk_widget_get_tooltip_markup (base.Handle);
@@ -962,9 +1046,11 @@ namespace Gtk3{
 				Marshaller.Free (intPtr);
 			}
 		}
-
+		
+		/// <summary>
+		///Sets the text of tooltip to be the given string.
+		/// </summary>
 		[Property ("tooltip-text")]
-		//Sets the text of tooltip to be the given string.
 		public string TooltipText {
 			get {
 				IntPtr ptr = Widget.gtk_widget_get_tooltip_text (base.Handle);
@@ -977,9 +1063,10 @@ namespace Gtk3{
 			}
 		}
 
-
+		/// <summary>
+		///How to distribute vertical space if widget gets extra space.
+		/// </summary>
 		[Property ("valign")]
-		//How to distribute vertical space if widget gets extra space.
 		public Align Valign {
 			get {
 				return (Align)Widget.gtk_widget_get_valign (base.Handle);
@@ -988,9 +1075,11 @@ namespace Gtk3{
 				Widget.gtk_widget_set_valign (base.Handle, (int)value);
 			}
 		}
-
+		
+		/// <summary>
+		///Whether to expand vertically.
+		/// </summary>
 		[Property ("vexpand")]
-		//Whether to expand vertically.
 		public bool Vexpand {
 			get {
 				return Widget.gtk_widget_get_vexpand(base.Handle);
@@ -1000,8 +1089,10 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		///Whether to use "vexpand" property.
+		/// </summary>
 		[Property ("vexpand-set")]
-		//Whether to use the “vexpand” property.
 		public bool VexpandSet {
 			get {
 				return Widget.gtk_widget_get_vexpand_set(base.Handle);
@@ -1011,8 +1102,10 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		///Whether the widget is visible.
+		/// </summary>
 		[Property ("visible")]
-		//Whether the widget is visible.
 		public bool Visible {
 			get {
 				GLib.Value property = base.GetProperty ("visible");
@@ -1026,9 +1119,11 @@ namespace Gtk3{
 				val.Dispose ();
 			}
 		}
-
+		
+		/// <summary>
+		///Override for width request of the widget, or -1 if natural request should be used.
+		/// </summary>
 		[Property ("width-request")]
-		//Override for width request of the widget, or -1 if natural request should be used.
 		public int WidthRequest {
 			get {
 				GLib.Value property = base.GetProperty ("width-request");
@@ -1042,9 +1137,11 @@ namespace Gtk3{
 				val.Dispose ();
 			}
 		}
-
+		
+		/// <summary>
+		///The widget's window if it is realized, NULL otherwise.
+		/// </summary>
 		[Property ("window")]
-		//The widget's window if it is realized, NULL otherwise.
 		public Gdk.Window Window{
 			get{
 				IntPtr o = Widget.gtk_widget_get_window (base.Handle);

@@ -81,13 +81,13 @@ namespace Gtk3
 		private static extern void gtk_container_child_get (IntPtr raw, IntPtr child, IntPtr first_property_name,out IntPtr var_args);
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void gtk_container_child_set (IntPtr raw, IntPtr child, IntPtr property_name, IntPtr value);
+		private static extern void gtk_container_child_set (IntPtr raw, IntPtr child, IntPtr property_name, IntPtr var_args);
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void gtk_container_child_get_property (IntPtr raw, IntPtr child, IntPtr property_name,out IntPtr value);
+		private static extern void gtk_container_child_get_property (IntPtr raw, IntPtr child, IntPtr property_name,out GLib.Value value);
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
-		private static extern void gtk_container_child_set_property (IntPtr raw, IntPtr child, IntPtr property_name, IntPtr value);
+		private static extern void gtk_container_child_set_property (IntPtr raw, IntPtr child, IntPtr property_name, ref GLib.Value value);
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void gtk_container_child_get_valist (IntPtr raw, IntPtr child, IntPtr first_property_name,out IntPtr var_args);
@@ -373,7 +373,7 @@ namespace Gtk3
 		{
 			GLib.Value result = default(Value);
 			IntPtr intPtr = Marshaller.StringToPtrGStrdup (propertyName);
-			Container.gtk_container_child_get_property (base.Handle, child.Handle, intPtr, ref result);
+			Container.gtk_container_child_get_property (base.Handle, child.Handle, intPtr, out result);
 			Marshaller.Free (intPtr);
 			return result;
 		}
@@ -394,7 +394,7 @@ namespace Gtk3
 		public void ChildGetValist (Widget child, string first_property_name, IntPtr var_args)
 		{
 			IntPtr intPtr = Marshaller.StringToPtrGStrdup (first_property_name);
-			Container.gtk_container_child_get_valist (base.Handle, (child != null) ? child.Handle : IntPtr.Zero, intPtr, var_args);
+			Container.gtk_container_child_get_valist (base.Handle, (child != null) ? child.Handle : IntPtr.Zero, intPtr, out var_args);
 			Marshaller.Free (intPtr);
 		}
 
