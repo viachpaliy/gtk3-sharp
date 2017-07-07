@@ -512,6 +512,9 @@ namespace Gtk3{
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void gtk_widget_reset_style (IntPtr raw);
 
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_widget_style_get_property (IntPtr raw,IntPtr property_name,out GLib.Value value);
+
 		#endregion
 
 		#region IBuildable implementation
@@ -1151,6 +1154,91 @@ namespace Gtk3{
 
 
 		#endregion
+
+		#region Style Properties
+		/// <summary>
+		/// Aspect ratio with which to draw insertion cursor.
+		/// </summary>
+		/// <value>Allowed values: [0,1]</value>
+		public float CursorAspectRatio {
+			get {
+				GLib.Value val = new GLib.Value(GType.Float);
+				 this.StyleGetProperty ("cursor-aspect-ratio",out val);
+				float result = (float)val;
+				val.Dispose ();
+				return result;
+			}
+		}
+
+		/// <summary>
+		/// The style property defines the length of horizontal scroll arrows.
+		/// </summary>
+		/// <value>The length of horizontal scroll arrows.</value>
+		public int ScrollArrowHlength {
+			get {
+				GLib.Value property = new GLib.Value (GType.Int);
+				this.StyleGetProperty ("scroll-arrow-hlength",out property);
+				int result = (int)property;
+				property.Dispose ();
+				return result;
+			}
+		}
+
+		/// <summary>
+		/// The style property defines the length of vertical scroll arrows.
+		/// </summary>
+		/// <value>The length of vertical scroll arrows.</value>
+		public int ScrollArrowVlength {
+			get {
+				GLib.Value property =  new GLib.Value (GType.Int);
+				this.StyleGetProperty ("scroll-arrow-vlength",out property);
+				int result = (int)property;
+				property.Dispose ();
+				return result;
+			}
+		}
+
+		/// <summary>
+		/// Height of text selection handles.
+		/// </summary>
+		public int TextHandleHeight {
+			get {
+				GLib.Value property =  new GLib.Value (GType.Int);
+				this.StyleGetProperty ("text-handle-height",out property);
+				int result = (int)property;
+				property.Dispose ();
+				return result;
+			}
+		}
+
+		/// <summary>
+		///Width of text selection handles.
+		/// </summary>
+		public int TextHandleWidth {
+			get {
+				GLib.Value property =  new GLib.Value (GType.Int);
+				this.StyleGetProperty ("text-handle-width",out property);
+				int result = (int)property;
+				property.Dispose ();
+				return result;
+			}
+		}
+
+		/// <summary>
+		/// Whether windows can be dragged and maximized by clicking on empty areas.
+		/// </summary>
+		public bool WindowDragging {
+			get {
+				GLib.Value property =  new GLib.Value (GType.Boolean);
+				this.StyleGetProperty ("window-dragging",out property);
+				bool result = (bool)property;
+				property.Dispose ();
+				return result;
+			}
+		}
+
+
+		#endregion
 		#region Shapr widget's properties
 
 		public Gdk.Screen Screen {
@@ -1205,6 +1293,27 @@ namespace Gtk3{
 		public void ResetStyle()
 		{
 			Widget.gtk_widget_reset_style (base.Handle);
+		}
+
+		/// <summary>
+		/// Gets the value of a style property of widget .
+		/// </summary>
+		/// <returns>The value of a style property.</returns>
+		/// <param name="propertyName">The name of a style property.</param>
+		public GLib.Value GetStyleProperty ( string propertyName)
+		{
+			GLib.Value result =new GLib.Value();
+			IntPtr intPtr = Marshaller.StringToPtrGStrdup (propertyName);
+			Widget.gtk_widget_style_get_property (base.Handle, intPtr, out result);
+			Marshaller.Free (intPtr);
+			return result;
+		}
+
+		public void StyleGetProperty (string propertyName,out GLib.Value value)
+		{
+			IntPtr intPtr = Marshaller.StringToPtrGStrdup (propertyName);
+			Widget.gtk_widget_style_get_property (base.Handle, intPtr, out value);
+			Marshaller.Free (intPtr);
 		}
 
 
