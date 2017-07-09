@@ -13,7 +13,9 @@ namespace Gtk3
 
 		void AddChild (Builder builder,Widget child);
 
-		GLib.Object ConstructChild (Builder builder, string name);
+		void SetBuildableProperty (Builder builder, string name, GLib.Value value);
+
+		Gtk3.Widget ConstructChild (Builder builder, string name);
 
 		void CustomTagEnd (Builder builder, Widget child, string tagname, string data);
 
@@ -21,7 +23,7 @@ namespace Gtk3
 
 		void ParserFinished (Builder builder);
 
-		GLib.Object GetInternalChild (Builder builder, string childname);
+		Gtk3.Widget GetInternalChild (Builder builder, string childname);
 	}
 }
 

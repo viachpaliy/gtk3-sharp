@@ -529,6 +529,9 @@ namespace Gtk3{
 		private static extern void gtk_buildable_add_child (IntPtr buildable, IntPtr builder, IntPtr child, IntPtr type);
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void 	gtk_buildable_set_buildable_property (IntPtr buildable, IntPtr builder, IntPtr name, GLib.Value value );
+
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr gtk_buildable_construct_child (IntPtr buildable, IntPtr builder, IntPtr name);
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
@@ -543,6 +546,10 @@ namespace Gtk3{
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr gtk_buildable_get_internal_child (IntPtr buildable, IntPtr builder, IntPtr childname);
 
+		/// <summary>
+		/// Sets the name of the buildable object.
+		/// </summary>
+		/// <param name="name">Name to set.</param>
 		void IBuildable.SetName (string name)
 		{
 			IntPtr namePtr = Marshaller.StringToPtrGStrdup (name);
@@ -550,12 +557,22 @@ namespace Gtk3{
 			Marshaller.Free (namePtr);
 		}
 
+		/// <summary>
+		/// Gets the name of the buildable object. 
+		/// </summary>
+		/// <returns>The name of the buildable object.</returns>
 		string IBuildable.GetName()
 		{
 			IntPtr namePtr=Widget.gtk_buildable_get_name(base.Handle);
 			return Marshaller.Utf8PtrToString (namePtr);
 		}
 
+		/// <summary>
+		/// Adds a child to buildable.
+		/// </summary>
+		/// <param name="builder">Builder.</param>
+		/// <param name="child">Child to add .</param>
+		/// <param name="type">Type  is an optional string describing how the child should be added or <c>null</c>.</param>
 		void IBuildable.AddChild (Builder builder,Widget child, string type)
 		{
 			IntPtr typePtr = Marshaller.StringToPtrGStrdup (type);
@@ -563,17 +580,48 @@ namespace Gtk3{
 			Marshaller.Free (typePtr);
 		}
 
+		/// <summary>
+		/// Adds the child to buildable.
+		/// </summary>
+		/// <param name="builder">Builder.</param>
+		/// <param name="child">Child to add.</param>
 		void IBuildable.AddChild (Builder builder,Widget child)
 		{
 			Widget.gtk_buildable_add_child (base.Handle, builder.Handle, child.Handle, IntPtr.Zero);
 		}
 
-		GLib.Object IBuildable.ConstructChild (Builder builder, string name)
+		/// <summary>
+		/// Sets the property name <c>name</c> to <c>value</c> on the buildable object.
+		/// </summary>
+		/// <param name="builder">Builder.</param>
+		/// <param name="name">Name of property.</param>
+		/// <param name="value">Value of property.</param>
+		void IBuildable.SetBuildableProperty (Builder builder, string name, GLib.Value value)
+		{
+			IntPtr namePtr = Marshaller.StringToPtrGStrdup (name);
+			Widget.gtk_buildable_set_buildable_property (base.Handle, builder.Handle, namePtr, value);
+			Marshaller.Free (namePtr);
+		}
+
+		/// <summary>
+		/// Constructs a child of buildable with the name name .
+		/// </summary>
+		/// <returns>The constructed child.</returns>
+		/// <param name="builder">Builder used to construct this object.</param>
+		/// <param name="name">Name of child to construct.</param>
+		Gtk3.Widget IBuildable.ConstructChild (Builder builder, string name)
 		{
 			IntPtr namePtr = Marshaller.StringToPtrGStrdup (name);
 			IntPtr o=Widget.gtk_buildable_construct_child (base.Handle, builder.Handle, namePtr);
 			Marshaller.Free (namePtr);
-			return GLib.Object.GetObject (o);
+			if (o == IntPtr.Zero) {
+				return null;
+			}
+			if (GLib.Object.GetObject (o) != null) {
+				return (Gtk3.Widget)GLib.Object.GetObject (o) ;
+			} else {
+				return new Gtk3.Widget (o);
+			}
 
 		}
 
@@ -586,6 +634,13 @@ namespace Gtk3{
 			Marshaller.Free (dataPtr);
 		}	
 
+		/// <summary>
+		/// Called once for each custom tag handled by the buildable .
+		/// </summary>
+		/// <param name="builder">Builder.</param>
+		/// <param name="child">Child.</param>
+		/// <param name="tagname">Tagname.</param>
+		/// <param name="data">Data.</param>
 		void IBuildable.CustomFinished (Builder builder, Widget child, string tagname, string data)
 		{
 			IntPtr tagnamePtr = Marshaller.StringToPtrGStrdup (tagname);
@@ -595,17 +650,34 @@ namespace Gtk3{
 			Marshaller.Free (dataPtr);
 		}
 
+		/// <summary>
+		/// Called when the builder finishes the parsing of a Gtk3.Builder UI definition. 
+		/// </summary>
+		/// <param name="builder">Builder.</param>
 		void IBuildable.ParserFinished (Builder builder)
 		{
 			Widget.gtk_buildable_parser_finished (base.Handle, builder.Handle);
 		}
 
-		GLib.Object IBuildable.GetInternalChild (Builder builder, string childname)
+		/// <summary>
+		/// Get the internal child called <c>childname<c>/c> of the buildable object.
+		/// </summary>
+		/// <returns>The internal child  of the buildable object.</returns>
+		/// <param name="builder">Builder.</param>
+		/// <param name="childname">Name of child.</param>
+		Gtk3.Widget IBuildable.GetInternalChild (Builder builder, string childname)
 		{
 			IntPtr namePtr = Marshaller.StringToPtrGStrdup (childname);
 			IntPtr o=Widget.gtk_buildable_get_internal_child (base.Handle, builder.Handle, namePtr);
 			Marshaller.Free (namePtr);
-			return GLib.Object.GetObject (o);
+			if (o == IntPtr.Zero) {
+				return null;
+			}
+			if (GLib.Object.GetObject (o) != null) {
+				return (Gtk3.Widget)GLib.Object.GetObject (o) ;
+			} else {
+				return new Gtk3.Widget (o);
+			}
 		}
 
 		#endregion
@@ -1316,14 +1388,14 @@ namespace Gtk3{
 			Marshaller.Free (intPtr);
 		}
 
-
 		#endregion
 
+		#region Events
 
-		#region Native widget's signals
-
+		/// <summary>
+		/// Raised when the closures for this widget's accelerator change.
+		/// </summary>
 		[Signal ("accel-closures-changed")]
-		//
 		public event EventHandler AccelClosuresChanged {
 			add {
 				Signal signal = Signal.Lookup (this, "accel-closures-changed");
@@ -1335,8 +1407,10 @@ namespace Gtk3{
 			}
 		}
 
+		/// <summary>
+		/// Raised when a button is pressed.
+		/// </summary>
 		[Signal ("button-press-event")]
-		// Signal will be emitted when a button (typically from a mouse) is pressed.
 		public event ButtonPressEventHandler ButtonPressEvent {
 			add {
 				Signal signal = Signal.Lookup (this, "button-press-event", typeof(ButtonPressEventArgs));
@@ -1348,9 +1422,10 @@ namespace Gtk3{
 			}
 		}
 
-
+		/// <summary>
+		/// Raised when a (mouse) button is released on this widget.
+		/// </summary>
 		[Signal ("button-release-event")]
-		// Signal will be emitted when a button (typically from a mouse) is released.
 		public event ButtonReleaseEventHandler ButtonReleaseEvent {
 			add {
 				Signal signal = Signal.Lookup (this, "button-release-event", typeof(ButtonReleaseEventArgs));
@@ -1362,9 +1437,11 @@ namespace Gtk3{
 			}
 		}
 
-		[Signal ("can-activate-accel")]
-		//Determines whether an accelerator that activates the signal
-		//identified by signal_id can currently be activated. 
+		/// <summary>
+		/// Determines whether an accelerator that activates the signal
+		/// identified by signal_id can currently be activated. 
+		/// </summary>
+		 [Signal ("can-activate-accel")]
 		public event CanActivateAccelHandler CanActivateAccel{
 			add {
 				Signal signal = Signal.Lookup (this, "can-activate-accel", typeof(CanActivateAccelArgs));
@@ -1375,10 +1452,11 @@ namespace Gtk3{
 				signal.RemoveDelegate (value);
 			}
 		}
-
-
+	
+		/// <summary>
+		/// Raised for each child property that has changed on an object. 
+		/// </summary>
 		[Signal ("child-notify")]
-		//Signal is emitted for each child property that has changed on an object. 
 		public event ChildNotifiedHandler ChildNotified {
 			add {
 				Signal signal = Signal.Lookup (this, "child-notify", typeof(ChildNotifiedArgs));
@@ -1391,21 +1469,10 @@ namespace Gtk3{
 		}
 
 
-		[Signal ("composited-changed")]
-		//Signal is emitted when the composited status of widgets screen changes.
-		public event EventHandler CompositedChanged {
-			add {
-				Signal signal = Signal.Lookup (this, "composited-changed");
-				signal.AddDelegate (value);
-			}
-			remove {
-				Signal signal = Signal.Lookup (this, "composited-changed");
-				signal.RemoveDelegate (value);
-			}
-		}
-
+		/// <summary>
+		/// Raised when the size, position or stacking of the widget 's window has changed.
+		/// </summary>
 		[Signal ("configure-event")]
-		//Signal will be emitted when the size, position or stacking of the widget 's window has changed.
 		public event ConfigureEventHandler ConfigureEvent {
 			add {
 				Signal signal = Signal.Lookup (this, "configure-event", typeof(ConfigureEventArgs));
