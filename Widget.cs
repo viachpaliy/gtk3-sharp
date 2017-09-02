@@ -1485,6 +1485,7 @@ namespace Gtk3{
 		}
 
 
+
 		[Signal ("delete-event")]
 		// Signal is emitted if a user requests that a toplevel window is closed.
 		public event DeleteEventHandler DeleteEvent {

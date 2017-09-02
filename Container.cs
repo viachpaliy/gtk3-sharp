@@ -47,8 +47,8 @@ namespace Gtk3
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void gtk_container_check_resize (IntPtr raw);
 
-//		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
-//		private static extern void gtk_container_foreach (IntPtr raw, CallbackNative cb, IntPtr callback_data);
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_container_foreach (IntPtr raw, IntPtr callbackNative , IntPtr callback_data);
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr gtk_container_get_children (IntPtr raw);
@@ -101,8 +101,8 @@ namespace Gtk3
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern void gtk_container_child_notify_by_pspec (IntPtr raw, IntPtr child, IntPtr pspec);
 
-//		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
-//		private static extern void gtk_container_forall (IntPtr raw, CallbackNative cb, IntPtr callback_data);
+		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
+		private static extern void gtk_container_forall (IntPtr raw, IntPtr callbackNative, IntPtr callback_data);
 
 		[DllImport (Global.GtkNativeDll, CallingConvention = CallingConvention.Cdecl)]
 		private static extern uint gtk_container_get_border_width (IntPtr raw);
@@ -403,6 +403,29 @@ namespace Gtk3
 			IntPtr intPtr = Marshaller.StringToPtrGStrdup (first_property_name);
 			Container.gtk_container_child_set_valist (base.Handle, (child != null) ? child.Handle : IntPtr.Zero, intPtr, var_args);
 			Marshaller.Free (intPtr);
+		}
+
+		public delegate void ForAllDelegate();
+		/// <summary>
+		/// Invokes callback on each direct child of container ,
+		///  including children that are considered “internal”
+		///  (implementation details of the container). 
+		/// </summary>
+		/// <param name="del">a callback.</param>
+		public void ForAll(ForAllDelegate del)
+		{
+			Container.gtk_container_forall(base.Handle,Marshal.GetFunctionPointerForDelegate (del),
+				IntPtr.Zero);
+		}
+
+		/// <summary>
+		/// Invokes callback on each non-internal child of container .
+		/// </summary>
+		/// <param name="del">a callback.</param>
+		public void Foreach(ForAllDelegate del)
+		{
+			Container.gtk_container_foreach(base.Handle,Marshal.GetFunctionPointerForDelegate (del),
+				IntPtr.Zero);
 		}
 
 		#endregion
